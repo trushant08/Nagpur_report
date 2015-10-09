@@ -1,0 +1,63 @@
+
+
+
+<div id="navbar">
+    <div id="dispIcons">
+        <a title="Home Page" href="index.htm" target="_self"><img src="images/icon_home.png" width="16" height="19" border="0" style="float:left" alt="Home Page" /></a>
+        <a title="Change Password" href="changePassword.htm" target="_self"><img src="images/icon_password.png" border="0" width="16" height="19" style="float:left" alt="Change Password" /></a>
+        <a title="Logout" href="j_spring_security_logout" target="_self"><img src="images/icon_logout.png" width="20" border="0" height="19" style="float:left" alt="" /></a>
+    </div>
+    <div id="dispClock">
+        <script type="text/javascript" language="JavaScript">show_clock();</script>
+    </div>
+    <div id='menubar'>
+        <ul class='sf-menu'>
+            <li class='current'>
+                <a href='#'>Admin</a>
+                <ul> 
+                    <li>
+                        <a href='#'>Report Type</a>
+                        <ul>
+                            <li> <a href='reportTypeAdd.htm'>Add Report Type</a></li> 
+                            <li> <a href='reportTypeList.htm'>List Report Type</a></li>
+                            <li> <a href='mapReportTypeGroup.htm'>Add mapping between report type and group</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href='#'>Group</a>
+                        <ul>
+                            <li> <a href='groupAdd.htm'>Add Group</a></li>
+                            <li> <a href='groupList.htm'>List Group</a></li>
+                            <li> <a href='mapGroupService.htm'>Add mapping between group and service</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href='#'>Service</a>
+                        <ul>
+                            <li> <a href='serviceAdd.htm'>Add Service</a></li>
+                            <li> <a href='serviceList.htm'>List Service</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href='#'>User</a>
+                        <ul>
+                            <li> <a href="adduser.htm">Add User</a></li>
+                            <li> <a href="userList.htm">List User</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class='current'>
+                <a href='#'>Report</a>
+                <ul> 
+                    <li> <a href='goAutoDialerReport.htm?id=1'>Nagpur GoAuto Dialer Report (5)</a></li>
+                    <li> <a href='goAutoDialerReport.htm?id=2'>Nagpur GoAuto Dialer Report (14)</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+    <div style="padding-top: 10px"><%@include file="common/message.jsp" %></div>
+</div>

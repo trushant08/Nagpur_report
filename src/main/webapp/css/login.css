@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+/*=================================================== 
+start css for login page 
+=====================================================*/
+
+body { background:#e9eff3; margin:0; padding:0; }
+
+/******  wrapper ******/
+#wrapper { width:100%; height:100%; margin:0; height:0;  }
+
+
+/****** body ******/
+
+#page_01 { width:960px; height:100%; margin:0 auto; padding:0; }
+
+/****** login form ******/
+.loginform { width:960px; height:465px; margin:20px auto 0 auto; padding:0; background:url() 0 0 no-repeat; }
+
+/* .logincoloumn { width:512px; height:390px; padding:0; position:relative; margin:50px auto;} */
+
+.login_logo_top { width:960px; height:80px; margin:0; padding:0; }
+
+.altius_logo { width:112px; height:80px; margin:0; padding:0;  float:right; position:relative; }
+
+.client_logo {  width:159px; height:80px; margin:0; padding:0; float:left; position:relative;  }
+
+.loginbox { width:437px; height:368px; margin:44px 0 0 29px; padding:0; background: url(../images/loginbox_bg_login.jpg)  0 0 no-repeat; }
+
+.loginbox fieldset { width:auto; height:218px; border:none; margin:59px 0 0 34px; padding:0; position:absolute; }
+
+.loginbox fieldset p { margin:0; padding:0; text-align:left; }
+
+.loginbox p.password { margin:38px 0 10px 0; }
+
+.loginbox fieldset p label { width:100%; height:18px; margin:0; padding:0; text-align:left; font:bold 12px/12px Arial, Helvetica, sans-serif; color:#fff; letter-spacing:1px; word-spacing:1px; text-transform:uppercase; display: block; }
+
+#j_username { width:295px; height:35px; margin:0; padding:0 0 0 50px;  background: url(../images/aquagreen_login_input_user.jpg) 0 0 no-repeat; border:none; outline:none; color:#666666;  }
+
+#j_password { width:295px; height:35px; margin:0; padding:0 0 0 50px;  background: url(../images/aquagreen_login_input_pass.jpg)  0 0 no-repeat; border:none; outline:none; color:#666666; }
+
+.loginbox input[type="button"], .loginform input[type="submit"], .loginform input[type="image"], .loginform button { cursor: pointer; }
+
+.loginbox .submit  { width:95px; height:35px; border:none; outline:none; margin:0; background:url(../images/button_submit.jpg) left top no-repeat; text-indent:0; float:right; position:relative; }
+
+.loginbox .submit:hover  { background-position:left bottom; }
+
+/****** login footer ******/
+
+.designby { width:960px; height:10px; padding:10px 0; margin:0px auto 10px auto; font:normal 11px Arial, Helvetica, sans-serif; color:#868585; text-align:left; display:block; clear:both; }
+
+.browser_wrapper { width:100%; height:auto; margin:0 auto; padding:0; display:block; clear:both; }
+.browser { width:960px; height:31px; margin:0 auto;  text-align:left; font:normal 11px Arial, Helvetica, sans-serif;
+color:#868585 ;}
+.firefox, .chrome, .safari { width:100px; height:30px; float:left; position:relative; padding:10px 0;}
+.firefox { background: url(../images/logo_firefox.gif) 45px top no-repeat; margin:0 0 0 10px}
+.chrome { background: url(../images/logo_chrome.gif) 45px top no-repeat; margin:0 0 0 -10px;}
+.safari { background: url(../images/logo_safari.gif) 45px top no-repeat; margin:0 0 0 -10px;}
+
+
+
+/****** error ******/
+#baderror {
+    margin:-20px 0 10px 10px;
+    width:100%;
+    font:normal 14px/14px  Arial, Verdana, sans-serif;
+    color: red;
+    text-align:center;
+    
+}
+.innerError {
+    background: url(../images/invalid.gif) left bottom no-repeat; 
+    padding: 1px 0 0 20px;
+    font:normal 12px/12px  Arial, Verdana, sans-serif;
+    float: left; position: relative;
+    height: 16px;
+    color:#fff;
+}

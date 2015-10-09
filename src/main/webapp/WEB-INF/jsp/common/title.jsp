@@ -1,0 +1,1 @@
+<title><spring:message code="title"/></title>
