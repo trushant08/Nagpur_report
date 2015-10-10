@@ -27,9 +27,11 @@ import org.springframework.stereotype.Repository;
 public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
 
     private JdbcTemplate jdbcTemplate;
-    private JdbcTemplate nagpurJdbcTemplate;
+    private JdbcTemplate nagpurJdbcTemplate5;
+    private JdbcTemplate nagpurJdbcTemplate14;
     private DataSource dataSource;
-    private DataSource nagpurDataSource;
+    private DataSource nagpurDataSource5;
+    private DataSource nagpurDataSource14;
 
     @Autowired
     @Qualifier("dataSource")
@@ -37,12 +39,19 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    
+
     @Autowired
-    @Qualifier("nagpurDataSource")
-    public void setNagpurDataSource(DataSource nagpurDataSource) {
-        this.nagpurDataSource = nagpurDataSource;
-        this.nagpurJdbcTemplate = new JdbcTemplate(nagpurDataSource);
+    @Qualifier("nagpurDataSource5")
+    public void setNagpurDataSource5(DataSource nagpurDataSource5) {
+        this.nagpurDataSource5 = nagpurDataSource5;
+        this.nagpurJdbcTemplate5 = new JdbcTemplate(nagpurDataSource5);
+    }
+
+    @Autowired
+    @Qualifier("nagpurDataSource14")
+    public void setNagpurDataSource14(DataSource nagpurDataSource14) {
+        this.nagpurDataSource14 = nagpurDataSource14;
+        this.nagpurJdbcTemplate14 = new JdbcTemplate(nagpurDataSource14);
     }
 
     @Override
@@ -79,7 +88,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
 
         String strSelectedServiceIds = "";
         for (String i : selectedServiceIds) {
-            strSelectedServiceIds += "'"+i + "',";
+            strSelectedServiceIds += "'" + i + "',";
         }
         if (selectedServiceIds.length > 0) {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
@@ -89,9 +98,9 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
-            report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+                report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else {
-                report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+                report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,12 +140,12 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
 
         List<Map<String, Object>> report = null;
         try {
-             if (id == 1) {
-            report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+            if (id == 1) {
+                report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else {
-                report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+                report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -180,13 +189,13 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         }
         sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
 
-        
+
         List<Map<String, Object>> report = null;
         try {
-             if (id == 1) {
-            report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+            if (id == 1) {
+                report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else {
-                report = this.nagpurJdbcTemplate.queryForList(sql, startDate, endDate);
+                report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
 
         } catch (Exception e) {

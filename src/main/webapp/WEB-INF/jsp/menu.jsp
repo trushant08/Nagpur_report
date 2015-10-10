@@ -12,52 +12,60 @@
     </div>
     <div id='menubar'>
         <ul class='sf-menu'>
-            <li class='current'>
-                <a href='#'>Admin</a>
-                <ul> 
-                    <li>
-                        <a href='#'>Report Type</a>
-                        <ul>
-                            <li> <a href='reportTypeAdd.htm'>Add Report Type</a></li> 
-                            <li> <a href='reportTypeList.htm'>List Report Type</a></li>
-                            <li> <a href='mapReportTypeGroup.htm'>Add mapping between report type and group</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='#'>Group</a>
-                        <ul>
-                            <li> <a href='groupAdd.htm'>Add Group</a></li>
-                            <li> <a href='groupList.htm'>List Group</a></li>
-                            <li> <a href='mapGroupService.htm'>Add mapping between group and service</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='#'>Service</a>
-                        <ul>
-                            <li> <a href='serviceAdd.htm'>Add Service</a></li>
-                            <li> <a href='serviceList.htm'>List Service</a></li>
+            <sec:authorize ifAnyGranted="ROLE_BF_ADMIN">
+                <li class='current'>   
+                    <a href='#'>Admin</a>
+                    <ul> 
+                        <li>
+                            <a href='#'>Report Type</a>
+                            <ul>
+                                <li> <a href='reportTypeAdd.htm'>Add Report Type</a></li> 
+                                <li> <a href='reportTypeList.htm'>List Report Type</a></li>
+                                <li> <a href='mapReportTypeGroup.htm'>Add mapping between report type and group</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='#'>Group</a>
+                            <ul>
+                                <li> <a href='groupAdd.htm'>Add Group</a></li>
+                                <li> <a href='groupList.htm'>List Group</a></li>
+                                <li> <a href='mapGroupService.htm'>Add mapping between group and service</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='#'>Service</a>
+                            <ul>
+                                <li> <a href='serviceAdd.htm'>Add Service</a></li>
+                                <li> <a href='serviceList.htm'>List Service</a></li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href='#'>User</a>
-                        <ul>
-                            <li> <a href="adduser.htm">Add User</a></li>
-                            <li> <a href="userList.htm">List User</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='#'>User</a>
+                            <ul>
+                                <li> <a href="adduser.htm">Add User</a></li>
+                                <li> <a href="userList.htm">List User</a></li>
 
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class='current'>
-                <a href='#'>Report</a>
-                <ul> 
-                    <li> <a href='goAutoDialerReport.htm?id=1'>Nagpur GoAuto Dialer Report (5)</a></li>
-                    <li> <a href='goAutoDialerReport.htm?id=2'>Nagpur GoAuto Dialer Report (14)</a></li>
-                </ul>
-            </li>
+                            </ul>
+                        </li>       
+                    </ul>
+                </li>
+            </sec:authorize>
+
+            <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_SHOW_REPORT">
+                <li class='current'>
+                    <a href='#'>Report</a>
+                    <ul> 
+                        <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK5">
+                        <li> <a href='goAutoDialerReport.htm?id=1'>Nagpur GoAuto Dialer Report (5)</a></li>
+                        </sec:authorize>
+                        <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK14">
+                        <li> <a href='goAutoDialerReport.htm?id=2'>Nagpur GoAuto Dialer Report (14)</a></li>
+                        </sec:authorize>
+                    </ul>
+                </li>
+            </sec:authorize>
         </ul>
-
     </div>
     <div style="padding-top: 10px"><%@include file="common/message.jsp" %></div>
 </div>

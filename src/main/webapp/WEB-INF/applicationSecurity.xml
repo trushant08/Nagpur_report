@@ -14,13 +14,36 @@
     <context:component-scan base-package="cc.altius.security" />
     <context:annotation-config />
 
-    <http auto-config="true" access-denied-page="/accessDenied.htm">
+    <http auto-config="true" use-expressions="true" access-denied-page="/accessDenied.htm">
         <form-login
             login-page="/login.htm"
             default-target-url="/index.htm"
             authentication-failure-url="/login.htm?login_error=true"
             />
-        <intercept-url pattern="/index.htm/**" access="ROLE_BF_USER_ADD"/>    
+        <intercept-url pattern="/login.htm" access="permitAll" />
+        <intercept-url pattern="/favicon.ico" access="permitAll" />
+        <intercept-url pattern="/css/**" access="permitAll" />
+        <intercept-url pattern="/images/**" access="permitAll" />
+        <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/badCredentials.htm" access="permitAll" />
+        <intercept-url pattern="/accessDenied.htm*" access="isFullyAuthenticated()"/>
+        <intercept-url pattern="/updateExpiredPassword.htm*" access="permitAll"/>
+        <intercept-url pattern="/reportTypeAdd.htm*" access="hasRole('ROLE_BF_ADD_REPORT_TYPE')"/>
+        <intercept-url pattern="/reportTypeList.htm*" access="hasRole('ROLE_BF_LIST_REPORT_TYPE')"/>
+        <intercept-url pattern="/reportTypeEdit.htm*" access="hasRole('ROLE_BF_EDIT_REPORT_TYPE')"/>
+        <intercept-url pattern="/mapReportTypeGroup.htm*" access="hasRole('ROLE_BF_MAP_REPORT_TYPE_GROUP')"/>
+        <intercept-url pattern="/groupAdd.htm*" access="hasRole('ROLE_BF_ADD_GROUP')"/>
+        <intercept-url pattern="/groupList.htm*" access="hasRole('ROLE_BF_LIST_GROUP')"/>
+        <intercept-url pattern="/groupEdit.htm*" access="hasRole('ROLE_BF_EDIT_GROUP')"/>
+        <intercept-url pattern="/mapGroupService.htm*" access="hasRole('ROLE_BF_MAP_GROUP_SERVICE')"/>
+        <intercept-url pattern="/serviceAdd.htm*" access="hasRole('ROLE_BF_ADD_SERVICE')"/>
+        <intercept-url pattern="/serviceList.htm*" access="hasRole('ROLE_BF_LIST_SERVICE')"/>
+        <intercept-url pattern="/serviceEdit.htm*" access="hasRole('ROLE_BF_EDIT_SERVICE')"/>
+        <intercept-url pattern="/adduser.htm*" access="hasRole('ROLE_BF_ADD_USER')"/>
+        <intercept-url pattern="/userList.htm*" access="hasRole('ROLE_BF_LIST_USER')"/>
+        <intercept-url pattern="/showEditUser.htm*" access="hasRole('ROLE_BF_EDIT_USER')"/>
+        <intercept-url pattern="/goAutoDialerReport.htm*" access="hasRole('ROLE_BF_SHOW_REPORT')"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_BF_SHOW_HOME')" />
     </http>
 
     <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>

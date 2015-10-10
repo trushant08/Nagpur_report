@@ -8,9 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%@include file="common/head.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="common/script.jsp" %>
         <%@include file="common/title.jsp"%>
+        
         <script>
             function checkPassword() {
                 if (document.getElementById("newPassword").value!=document.getElementById("confirmPassword").value || document.getElementById("newPassword").value=="") {                   
@@ -28,6 +30,7 @@
         </script>
     </head>
     <body>
+        
         <div class="in_02">
             <%@include file="common/message.jsp" %>
             <form:form commandName="password" method="POST" onsubmit="return checkPassword();">
