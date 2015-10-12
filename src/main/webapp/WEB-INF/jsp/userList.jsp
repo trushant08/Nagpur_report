@@ -58,8 +58,8 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
-
+            </table><br>
+            <a style="font-size: 14px" href="addUser.htm" >Add User</a>
             <form name="form2" id="form2" action="" method="post">
                 <input type="hidden" id="userId" name="userId"/>
             </form>

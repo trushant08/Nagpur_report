@@ -169,8 +169,9 @@ public class AdminController {
     @RequestMapping(value = "mapReportTypeGroup.htm", method = RequestMethod.POST)
     public String mappingGroupPost(HttpServletRequest request) {
         int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportTypeId", 0);
+        int serverTypeId = ServletRequestUtils.getIntParameter(request, "serverTypeId", 0);
         String[] assignGroups = ServletRequestUtils.getStringParameter(request, "finalAssignGroups", "").split(",");
-        int result = this.adminService.insertReportTypeGroupMapping(reportTypeId, assignGroups);
+        int result = this.adminService.insertReportTypeGroupMapping(reportTypeId, assignGroups, serverTypeId);
         if (result == 0) {
             return "mapReportTypeGroup";
         } else {
@@ -189,8 +190,9 @@ public class AdminController {
     @RequestMapping(value = "mapGroupService.htm", method = RequestMethod.POST)
     public String mappingServicePost(HttpServletRequest request) {
         int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
+        int serverTypeId = ServletRequestUtils.getIntParameter(request, "serverTypeId", 0);
         String[] assignServices = ServletRequestUtils.getStringParameter(request, "finalAssignServices", "").split(",");
-        int result = this.adminService.insertGroupServiceMapping(groupId, assignServices);
+        int result = this.adminService.insertGroupServiceMapping(groupId, assignServices, serverTypeId);
         if (result == 0) {
             return "mapGroupService";
         } else {

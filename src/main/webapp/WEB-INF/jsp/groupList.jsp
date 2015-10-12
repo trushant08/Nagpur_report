@@ -45,8 +45,8 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
-
+            </table><br>
+            <a style="font-size: 14px" href="groupAdd.htm" >Add Group</a>
             <form name="form2" id="form2" action="" method="get">
                 <input type="hidden" id="groupId" name="groupId"/>
             </form>

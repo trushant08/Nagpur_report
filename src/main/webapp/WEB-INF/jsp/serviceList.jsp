@@ -47,8 +47,9 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
 
+            </table><br>
+            <a style="font-size: 14px;" href="serviceAdd.htm" >Add Service</a>
             <form name="form2" id="form2" action="" method="get">
                 <input type="hidden" id="serviceId" name="serviceId"/>
             </form>

@@ -108,8 +108,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups) {
-        return this.adminDao.insertReportTypeGroupMapping(reportTypeId, assignGroups);
+    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups, int serverTypeId) {
+        return this.adminDao.insertReportTypeGroupMapping(reportTypeId, assignGroups, serverTypeId);
     }
     
     @Override
@@ -128,7 +128,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int insertGroupServiceMapping(int groupId, String[] assignServices) {
-        return this.adminDao.insertGroupServiceMapping(groupId, assignServices);
+    public int insertGroupServiceMapping(int groupId, String[] assignServices, int serverTypeId) {
+        return this.adminDao.insertGroupServiceMapping(groupId, assignServices, serverTypeId);
     }
 }

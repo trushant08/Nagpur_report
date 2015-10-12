@@ -50,7 +50,7 @@ public class AdminDaoImpl implements AdminDao {
     public int addReportType(ReportType reportType) {
         SimpleJdbcInsert reportTypeInsert = new SimpleJdbcInsert(this.dataSource).withTableName("report_types").usingGeneratedKeyColumns("REPORT_TYPE_ID");
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("REPORT_DESC", reportType.getReportTypeDesc());
+        params.put("REPORT_TYPE_DESC", reportType.getReportTypeDesc());
         params.put("SERVER_TYPE_ID", reportType.getServerType().getServerTypeId());
         params.put("ACTIVE", reportType.isActive());
         int reportTypeId = reportTypeInsert.executeAndReturnKey(params).intValue();
@@ -74,7 +74,7 @@ public class AdminDaoImpl implements AdminDao {
 
     @Override
     public void updateReportType(ReportType reportType) {
-        String sql = "UPDATE report_types SET REPORT_DESC =?, ACTIVE=?, SERVER_TYPE_ID=? WHERE REPORT_TYPE_ID=?";
+        String sql = "UPDATE report_types SET REPORT_TYPE_DESC =?, ACTIVE=?, SERVER_TYPE_ID=? WHERE REPORT_TYPE_ID=?";
         try {
             this.jdbcTemplate.update(sql, reportType.getReportTypeDesc(), reportType.isActive(), reportType.getServerType().getServerTypeId(), reportType.getReportTypeId());
         } catch (Exception e) {
@@ -181,7 +181,7 @@ public class AdminDaoImpl implements AdminDao {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
                     +" LEFT JOIN report_type_group rtg ON rtg.`GROUP_ID`=g.`GROUP_ID`"
                     +" LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE REPORT_TYPE_ID=? AND st.`SERVER_TYPE_ID`=?";
+                    +" WHERE REPORT_TYPE_ID=? AND g.`SERVER_TYPE_ID`=?";
         return this.jdbcTemplate.query(sql, new GroupMapper(), reportTypeId, serverTypeId);
     }
 
@@ -191,13 +191,13 @@ public class AdminDaoImpl implements AdminDao {
                     +" LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
                     +" WHERE GROUP_ID NOT IN"
                     +" (SELECT GROUP_ID FROM report_type_group WHERE REPORT_TYPE_ID =?)"
-                    + "AND st.`SERVER_TYPE_ID`=?";
+                    + "AND g.`SERVER_TYPE_ID`=? AND g.`ACTIVE`=1";
         return this.jdbcTemplate.query(sql, new GroupMapper(), reportTypeId, serverTypeId);
     }
 
     @Override
     @Transactional
-    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups) {
+    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups, int serverTypeId) {
         StringBuilder sqlBuilder = new StringBuilder();
 
         //Delete all assigned groups from report_type_group.
@@ -207,9 +207,9 @@ public class AdminDaoImpl implements AdminDao {
 
         //Assign default groups to report type.
         sqlBuilder.setLength(0);
-        sqlBuilder.append("INSERT INTO report_type_group(REPORT_TYPE_GROUP_ID,REPORT_TYPE_ID,GROUP_ID) VALUES (NULL,?,?)");
+        sqlBuilder.append("INSERT INTO report_type_group(REPORT_TYPE_GROUP_ID,REPORT_TYPE_ID,GROUP_ID,SERVER_TYPE_ID) VALUES (NULL,?,?,?)");
         for (String assign : assignGroups) {
-            this.jdbcTemplate.update(sqlBuilder.toString(), reportTypeId, Integer.parseInt(assign));
+            this.jdbcTemplate.update(sqlBuilder.toString(), reportTypeId, Integer.parseInt(assign), serverTypeId);
         }
 
         return 1;
@@ -228,7 +228,7 @@ public class AdminDaoImpl implements AdminDao {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,s.* FROM service s"
                     +" LEFT JOIN service_group sg ON sg.`SERVICE_ID`=s.`SERVICE_ID`"
                     +" LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE GROUP_ID=? AND st.`SERVER_TYPE_ID`=?";
+                    +" WHERE GROUP_ID=? AND s.`SERVER_TYPE_ID`=?";
         return this.jdbcTemplate.query(sql, new ServiceMapper(), groupId, serverTypeId);
     }
 
@@ -238,13 +238,13 @@ public class AdminDaoImpl implements AdminDao {
                     +" LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
                     +" WHERE SERVICE_ID NOT IN"
                     +" (SELECT SERVICE_ID FROM service_group WHERE GROUP_ID =?)"
-                    +" AND st.`SERVER_TYPE_ID`=?";
+                    +" AND s.`SERVER_TYPE_ID`=? AND s.`ACTIVE`=1";
         return this.jdbcTemplate.query(sql, new ServiceMapper(), groupId, serverTypeId);
     }
 
     @Override
     @Transactional
-    public int insertGroupServiceMapping(int groupId, String[] assignServices) {
+    public int insertGroupServiceMapping(int groupId, String[] assignServices, int serverTypeId) {
         StringBuilder sqlBuilder = new StringBuilder();
 
         //Delete all assigned services from service_group.
@@ -254,9 +254,9 @@ public class AdminDaoImpl implements AdminDao {
 
         //Assign default services to group.
         sqlBuilder.setLength(0);
-        sqlBuilder.append("INSERT INTO service_group(SERVICE_GROUP_ID,GROUP_ID,SERVICE_ID) VALUES (NULL,?,?)");
+        sqlBuilder.append("INSERT INTO service_group(SERVICE_GROUP_ID,GROUP_ID,SERVICE_ID,SERVER_TYPE_ID) VALUES (NULL,?,?,?)");
         for (String assign : assignServices) {
-            this.jdbcTemplate.update(sqlBuilder.toString(), groupId, Integer.parseInt(assign));
+            this.jdbcTemplate.update(sqlBuilder.toString(), groupId, Integer.parseInt(assign), serverTypeId);
         }
 
         return 1;

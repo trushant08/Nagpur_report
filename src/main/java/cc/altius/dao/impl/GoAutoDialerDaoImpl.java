@@ -5,12 +5,6 @@
 package cc.altius.dao.impl;
 
 import cc.altius.dao.GoAutoDialerDao;
-import cc.altius.model.Group;
-import cc.altius.model.ReportType;
-import cc.altius.model.Service;
-import cc.altius.model.mapper.GroupMapper;
-import cc.altius.model.mapper.ReportTypeMapper;
-import cc.altius.model.mapper.ServiceMapper;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -137,7 +131,9 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ")";
-
+        System.out.println("sql = "+sql);
+        System.out.println("startDate = "+ startDate);
+        System.out.println("endDate = "+ endDate);
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {

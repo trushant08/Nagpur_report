@@ -52,7 +52,7 @@ public interface AdminService {
     
     public List<Group> getGroupListNotMapped(int reportTypeId, int serverTypeId);
     
-    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups);
+    public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups, int serverTypeId);
     
     public List<Group> getGroupListByserverTypeId(int serverTypeId);
     
@@ -60,5 +60,5 @@ public interface AdminService {
     
     public List<Service> getServiceListNotMapped(int groupId, int serverTypeId);
     
-    public int insertGroupServiceMapping(int groupId, String[] assignServices);
+    public int insertGroupServiceMapping(int groupId, String[] assignServices, int serverTypeId);
 }
