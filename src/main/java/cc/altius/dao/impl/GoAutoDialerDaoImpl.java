@@ -8,6 +8,7 @@ import cc.altius.dao.GoAutoDialerDao;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -184,7 +185,6 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
-
 
         List<Map<String, Object>> report = null;
         try {

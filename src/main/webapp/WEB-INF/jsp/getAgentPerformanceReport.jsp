@@ -47,7 +47,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${list}" var="listItem">
-                        <tr class="row">
+                        <tr class="">
 
                             <td><c:out value="${listItem.user}"/></td>
                             <td><c:out value="${listItem.full_name}"/></td>
