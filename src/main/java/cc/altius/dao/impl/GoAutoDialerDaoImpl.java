@@ -104,7 +104,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     }
 
     @Override
-    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int reportTypeId, int id) {
+    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
 
         String sql = "SELECT "
                 + "vicidial_log.`call_date`,"

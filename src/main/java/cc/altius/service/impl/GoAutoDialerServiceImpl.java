@@ -29,8 +29,8 @@ public class GoAutoDialerServiceImpl implements GoAutoDialerService {
     }
     
     @Override
-    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int reportTypeId, int id) {
-        return this.GoAutoDialerDao.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, id);
+    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
+        return this.GoAutoDialerDao.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, id);
     }
     
     @Override

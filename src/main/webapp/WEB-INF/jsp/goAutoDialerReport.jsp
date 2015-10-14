@@ -156,7 +156,7 @@
 
                 <input type="hidden" name="reportId" value="${reportTypeId}"/>
                 <input type="hidden" name="groupId" value="${groupId}"/>
-                <input type="hidden" name="Id" value="${Id}"/>
+                <input type="hidden" name="id" value="${id}"/>
                 <div id="hiddenService" style="display: none">
                     <select name="selectedServiceIds" id="selectedServiceIds" multiple>
                         <c:forEach items="${selectedServiceIds}" var="item">

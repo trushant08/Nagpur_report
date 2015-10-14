@@ -43,7 +43,7 @@ public class ExcelController {
         try {
             String startDate = ServletRequestUtils.getStringParameter(request, "startDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
             String endDate = ServletRequestUtils.getStringParameter(request, "stopDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
-            int serverId = ServletRequestUtils.getIntParameter(request, "Id", 0);
+            int serverId = ServletRequestUtils.getIntParameter(request, "id", 0);
 
             //These dates are for Excel File Name.......(Used in Excel File Name)
 
@@ -51,11 +51,11 @@ public class ExcelController {
             String endDateExcel = endDate.substring(0, 10);
 
             int zoneId = ServletRequestUtils.getIntParameter(request, "zoneId", 0);
-            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);    
-                        
-            int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
-            String selectedServiceIds[] = ServletRequestUtils.getStringParameters(request, "selectedServiceIds");          
+            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);
 
+            int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
+            String selectedServiceIds[] = ServletRequestUtils.getStringParameters(request, "selectedServiceIds");
+            System.out.println("serverId = "+serverId+" zoneId="+zoneId+" groupId="+groupId+" reportTypeId="+reportTypeId+" selectedServiceIds = "+selectedServiceIds.toString());
             String startDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(startDate);
 
             String endDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(endDate);
@@ -65,11 +65,11 @@ public class ExcelController {
             //List<Map<String, Object>> leadData = null;
             List<Map<String, Object>> list = null;
 
-            if (reportTypeId == 1) {
+            if (reportTypeId == 1 || reportTypeId == 3) {
                 if (zoneId == TIME_IST) {
-                                            
+
                     list = this.goAutoDialerService.goAutoDialerInboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
-                                        
+                    System.out.println("list excel report= "+list);
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
                     response.setContentType("application/vnd.ms-excel");
@@ -97,7 +97,7 @@ public class ExcelController {
                         String call_dateString = "";
                         String call_dateFormatted = "";
                         Date t = (Date) data.get("call_date");
-                        
+
                         if (t != null) {
                             Date convertedDate = CommonUtils.dateConverte_EST_To_IST(t);
 
@@ -147,7 +147,7 @@ public class ExcelController {
                     headerRow.addCell("Length In Sec");
                     headerRow.addCell("Queue sec");
                     headerRow.addCell("Hold Time");
-                    headerRow.addCell("Wrap Time");                 
+                    headerRow.addCell("Wrap Time");
                     headerRow.addCell("User");
                     headerRow.addCell("Call Date(EST)");
 
@@ -175,7 +175,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("length_in_sec"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("queue_seconds"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("HoldTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("wraptime"), POICell.TYPE_TEXT);                       
+                        dataRow.addCell(data.get("wraptime"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
                         dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
                         mySheet.addRow(dataRow);
@@ -203,7 +203,7 @@ public class ExcelController {
                     headerRow.addCell("Length In Sec");
                     headerRow.addCell("Queue sec");
                     headerRow.addCell("Hold Time");
-                    headerRow.addCell("Wrap Time");                  
+                    headerRow.addCell("Wrap Time");
                     headerRow.addCell("User");
                     headerRow.addCell("Call Date(EST)");
 
@@ -231,7 +231,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("length_in_sec"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("queue_seconds"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("HoldTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("wraptime"), POICell.TYPE_TEXT);                      
+                        dataRow.addCell(data.get("wraptime"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
                         dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
                         mySheet.addRow(dataRow);
@@ -240,11 +240,11 @@ public class ExcelController {
                     out.close();
                     out.flush();
                 }
-            } else if (reportTypeId == 2 || reportTypeId == 3) {
+            } else if (reportTypeId == 2 || reportTypeId == 4) {
 
                 if (zoneId == TIME_IST) {
 
-                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, reportTypeId, serverId);
+                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=OutBoundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -286,7 +286,7 @@ public class ExcelController {
                     out.close();
                     out.flush();
                 } else if (zoneId == TIME_EST) {
-                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, serverId);
+                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=OutBoundReport(EST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -330,7 +330,7 @@ public class ExcelController {
                     out.flush();
                 } else if (zoneId == TIME_PST) {
 
-                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, reportTypeId, serverId);
+                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=OutBoundReport(PST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");

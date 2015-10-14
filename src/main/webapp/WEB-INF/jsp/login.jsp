@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta http-equiv="Expires" content="Tue, 01 Jan 2000 12:12:12 GMT"/>
 
-        <link rel="stylesheet" type="text/css" href="../css/login.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="css/login.css" media="screen">
         <script type="text/javascript">
             var rules=new Array();
             rules[0]='j_username|required|Enter User Name';
@@ -51,26 +51,30 @@
                             </p>
                             <input type="submit" value="" class="submit" onclick="return yav.performCheck('user-login', rules, 'inline');"/>
                         </fieldset>
-                        <!-- start error message -->
-                        <c:if test="${param.login_error=='true'}">
-                            <p id="baderror">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
-                        </c:if>
-                        <c:if test="${param.errorMsg=='locked'}">
-                            <span id="baderror">Your account has been locked. Please contact an Administrator.</span>
-                        </c:if>
-                        <c:if test="${param.errorMsg=='credentials'}">
-                            <span id="baderror">Incorrect username or password entered.</span>
-                        </c:if>
-                        <!-- end error message -->
-                        <!-- start powered by -->
-                        <div class="designby">
-                            <span style="float:left; position:relative;">Designed and built by Altius Customer Services Pvt Ltd</span>
-                            <span  style="float:right; position:relative;">Report v.1 ${majorVersion}.${minorVersion} </span>
+                        <div class="row">
+                            <!-- start powered by -->
+                            <div class="designby" style="float: left; clear: both; margin-top: 291px;">
+                                <span style="float:left;">Designed and built by Altius Customer Services Pvt Ltd</span>
+                            </div>
+                            <div class="" style="float: left; clear: both; margin-top: 32px; margin-left: 128px;">
+                            <!-- start error message -->
+                            <c:if test="${param.login_error=='true'}">
+                                <p id="baderror">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+                            </c:if>
+                            <c:if test="${param.errorMsg=='locked'}">
+                                <span id="baderror">Your account has been locked. Please contact an Administrator.</span>
+                            </c:if>
+                            <c:if test="${param.errorMsg=='credentials'}">
+                                <span id="baderror">Incorrect username or password entered.</span>
+                            </c:if>
+                            <!-- end error message -->
+                            </div>
                         </div>
                     </div>
                     <!-- end powered by -->  
                     <div class="browser_wrapper">
-                        <div class="browser"> <span style="float:left; position:relative; margin:0;  padding:10px 0; text-align:left;">Best viewed with : </span> <span class="firefox">Firefox</span> <span class="chrome">Chrome</span> <span class="safari">Safari</span></div>
+                        <div class="browser"> <span style="float:left; position:relative; margin:0;  padding:10px 0; text-align:left;">Best viewed with : </span> <span class="firefox">Firefox</span> <span class="chrome">Chrome</span> <span class="safari">Safari</span>
+                            <span  style="float:left; position:relative; margin:0;  padding:10px 0; text-align:left;">Report v.1 ${majorVersion}.${minorVersion} </span></div>
                     </div> 
 
                 </form>

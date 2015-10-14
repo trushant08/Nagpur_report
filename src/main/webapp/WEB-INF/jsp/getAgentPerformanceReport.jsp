@@ -15,7 +15,7 @@
     <body>
         <%@include file="goAutoDialerReport.jsp" %>
         <div class="in_02">
-            
+
             <h2>Go Auto Dialer Agent Performance log Report</h2>
             <c:out value="${fn:length(list)}"/> rows found.
             <span style="padding-left: 700px;">  <a href="#" onclick="$('#excelForm').submit();">

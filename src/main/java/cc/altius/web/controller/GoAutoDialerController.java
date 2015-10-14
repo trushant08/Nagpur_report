@@ -125,7 +125,7 @@ public class GoAutoDialerController {
             if (reportTypeId == 1 || reportTypeId == 3) {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, id);
             } else if (reportTypeId == 2|| reportTypeId == 4) {
-                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, reportTypeId, id);
+                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, id);
             } else{
                 list = this.goAutoDialerService.getAgentPerformanceReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, id);
             }
@@ -152,7 +152,7 @@ public class GoAutoDialerController {
             if (reportTypeId == 1 || reportTypeId == 3) {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, id);
             } else if (reportTypeId == 2 || reportTypeId == 4) {
-                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, id);
+                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, id);
             } else {
                 list = this.goAutoDialerService.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
             }
@@ -179,7 +179,7 @@ public class GoAutoDialerController {
             if (reportTypeId == 1 || reportTypeId == 3) {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
             } else if (reportTypeId == 2 || reportTypeId ==4) {
-                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, reportTypeId, id);
+                list = this.goAutoDialerService.goAutoDialerOutboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
             } else {
                 list = this.goAutoDialerService.getAgentPerformanceReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
             }
