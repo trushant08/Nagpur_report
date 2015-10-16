@@ -79,24 +79,25 @@ public class UserController {
         return "redirect:j_spring_security_logout";
     }
 
-    @RequestMapping(value = "adduser.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "addUser.htm", method = RequestMethod.GET)
     public String showAddUserForm(ModelMap model) {
         CustomUserDetails curUser = (CustomUserDetails) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         User user = new User();
+        user.setActive(true);
         model.addAttribute("user", user);
         model.addAttribute("roleList", this.userService.getRoleList());
 
         return "addUser";
     }
 
-    @RequestMapping(value = "adduser.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "addUser.htm", method = RequestMethod.POST)
     public String onAddUserSubmit(@ModelAttribute("user") User user, Errors errors, ModelMap model, HttpServletRequest request) {
-        System.out.println("In user Controller Post ****************");
+        
         CustomUserDetails curUser = (CustomUserDetails) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         String cancel = ServletRequestUtils.getStringParameter(request, "_cancel", null);
         if (cancel != null) {
             user = null;
-            System.out.println("Cancel***********************");
+            
             return "redirect:userList.htm?msg=msg.actionCancelled";
         } else {
             if (this.userService.existUserByUsername(user.getUsername())) {

@@ -21,20 +21,25 @@ import org.springframework.stereotype.Service;
 public class GoAutoDialerServiceImpl implements GoAutoDialerService {
 
     @Autowired
-    GoAutoDialerDao GoAutoDialerDao;
+    GoAutoDialerDao goAutoDialerDao;
   
     @Override
     public List<Map<String, Object>> goAutoDialerInboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
-        return this.GoAutoDialerDao.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, id);
+        return this.goAutoDialerDao.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getGoAutoDialerInboundList(String startDate, String endDate, String[] selectedServiceIds, int id) {
+        return this.goAutoDialerDao.getGoAutoDialerInboundList(startDate, endDate, selectedServiceIds, id);
     }
     
     @Override
-    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
-        return this.GoAutoDialerDao.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, id);
+    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int reportTypeId, int id) {
+        return this.goAutoDialerDao.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, id);
     }
     
     @Override
     public List<Map<String, Object>> getAgentPerformanceReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
-        return this.GoAutoDialerDao.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
+        return this.goAutoDialerDao.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
     }
 }

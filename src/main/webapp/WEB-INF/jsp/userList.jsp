@@ -45,15 +45,15 @@
                         <tr id="row" data-user-id="${userItem.userId}">
                             <td><c:out value="${userItem.userId}"/></td>
                             <td><c:out value="${userItem.username}"/></td>
-                            <td><c:out value="${userItem.role.roleName}"/></td>
+                            <td><c:out value="${userItem.role.roleId}"/></td>
                             <td><c:out value="${userItem.active}"/></td>
                             <td><c:choose><c:when test="${userItem.outsideAccess}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></td>
                             <td><fmt:formatDate value="${userItem.expiresOn}" pattern="dd-MM-yyyy"/></td>
                             <td><c:out value="${userItem.failedAttempts}"/></td>
                             <td><fmt:formatDate value="${userItem.lastLoginDate}" pattern="dd-MM-yyyy"/></td>
                             <td style="text-align: center;">
-                                <a href="#" class="resetLink" title="Reset failed attempts"><img src="../images/reset.png" style="border: 0;"/></a>
-                                <a href="#" class="editLink"  title="Edit User"><img src="../images/edit.png" style="border: 0;"/>
+                                <a href="#" class="resetLink" title="Reset failed attempts"><img src="images/reset.png" style="border: 0;"/></a>
+                                <a href="#" class="editLink"  title="Edit User"><img src="images/edit.png" style="border: 0;"/>
                             </td>
                         </tr>
                     </c:forEach>

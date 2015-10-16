@@ -16,8 +16,8 @@
         <div class="in_02">       
             <h2>Go Auto Dialer Inbound Call Log Report</h2>
             <c:out value="${fn:length(list)}"/> rows found.
-            <span style="padding-left: 700px;">  <a href="#" onclick="$('#excelForm').submit();"><img src="images/Excel.png" alt="Download excel file" border="0" /></a><br/></span>
-            <table class="data_table" width="850px">
+            <span style="padding-left: 1000px;">  <a href="#" onclick="$('#excelForm').submit();"><img src="images/Excel.png" alt="Download excel file" border="0" /></a><br/></span>
+            <table class="data_table" width="1150px">
                 <thead>
                     <tr class="header">
                         <th>Call Date(<c:choose><c:when test="${zoneId==0}">IST</c:when><c:when test="${zoneId==1}">PST</c:when><c:otherwise>EST</c:otherwise></c:choose>)</th>

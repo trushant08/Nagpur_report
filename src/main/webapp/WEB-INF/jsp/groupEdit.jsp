@@ -20,7 +20,7 @@
         <div class="in_02">
             <form:form id="form1" name="form1" modelAttribute="group" action="groupEdit.htm" method="POST"> 
                 <fieldset>
-                    <legend>Edit Report Type</legend>
+                    <legend>Edit Group</legend>
                     <form:hidden path="groupId" value="${groupId}"/>
                     Group Name: 
                     <form:input path="groupDesc" value="${groupDesc}"/><br><br/>

@@ -24,7 +24,7 @@
             <form:form commandName="user" method="POST" name="form1" action="editUser.htm">
                 <form:hidden path="userId"/>
                 <fieldset>                 
-                    <legend><spring:message code="title.addUser"/></legend>
+                    <legend><spring:message code="title.editUser"/></legend>
 
                     <div class="row">
                         <div class="col-md-9">

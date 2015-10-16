@@ -49,6 +49,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         this.nagpurJdbcTemplate14 = new JdbcTemplate(nagpurDataSource14);
     }
 
+    //GoAuto Dialer Report with Hold Time
     @Override
     public List<Map<String, Object>> goAutoDialerInboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
         String sql = " SELECT "
@@ -89,8 +90,65 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
         }
         sql += strSelectedServiceIds + ")";
-
+     
         List<Map<String, Object>> report = null;
+        try {
+            if (id == 1) {
+                report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
+            } else {
+                report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return report;
+    }
+    
+    //GoAuto Dialer Inbound Report
+    @Override
+    public List<Map<String, Object>> getGoAutoDialerInboundList(String startDate, String endDate, String[] selectedServiceIds, int id) {
+        String sql = "SELECT "
+                + " vicidial_did_log.`uniqueid`, "
+                + " vicidial_did_log.`caller_id_number`, "
+                + " vicidial_inbound_dids.`did_description`, "
+                + " vicidial_campaigns.`campaign_description`, "
+                + " COALESCE(vicidial_closer_log.`term_reason`,'IVR ABANDON') AS term_reason, "
+                + " COALESCE(vicidial_closer_log.`status`,'IVR ABANDON') AS `status`, "
+                + " vicidial_closer_log.`call_date`, "
+                + " IF ( "
+                + " vicidial_closer_log.`status` = 'NANQUE' , "
+                + " call_log.`length_in_sec`, "
+                + " vicidial_closer_log.`length_in_sec` "
+                + " ) AS length_in_sec, "
+                + " vicidial_closer_log.`queue_seconds`, "
+                + " vicidial_closer_log.`user` "
+                + " FROM "
+                + " vicidial_did_log "
+                + " LEFT JOIN vicidial_inbound_dids "
+                + " ON vicidial_inbound_dids.`did_id` = vicidial_did_log.`did_id` "
+                + " LEFT JOIN vicidial_closer_log "
+                + " ON vicidial_did_log.`uniqueid` = vicidial_closer_log.`uniqueid` "
+                + " LEFT JOIN vicidial_campaigns "
+                + " ON vicidial_inbound_dids.`campaign_id` = vicidial_campaigns.`campaign_id` "
+                + " LEFT JOIN call_log "
+                + " ON call_log.`uniqueid` = vicidial_did_log.`uniqueid` "
+                //                + "WHERE vicidial_did_log.`call_date` BETWEEN '2015-07-24 00:00' "
+                //                + "  AND '2015-07-24 23:59' AND vicidial_inbound_dids.`did_id` IN (13,14,16,17,19);"
+                + " where vicidial_did_log.`call_date` >=? and "
+                + " vicidial_did_log.`call_date` <=? and "
+                + " vicidial_inbound_dids.`did_id` IN (";
+        
+        String strSelectedServiceIds = "";
+        for (String i : selectedServiceIds) {
+            strSelectedServiceIds += i + ",";
+        }
+        if (selectedServiceIds.length > 0) {
+            strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
+        }
+        sql += strSelectedServiceIds + ")";
+        
+        List<Map<String, Object>> report = null;
+        
         try {
             if (id == 1) {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
@@ -104,7 +162,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     }
 
     @Override
-    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
+    public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int reportTypeId, int id) {
 
         String sql = "SELECT "
                 + "vicidial_log.`call_date`,"
@@ -120,8 +178,13 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 + "FROM vicidial_log "
                 + "LEFT JOIN call_log ON call_log.`uniqueid` = vicidial_log.`uniqueid` "
                 + "WHERE vicidial_log.`call_date` BETWEEN ? AND ? ";
-
-
+        if (reportTypeId == 3 || reportTypeId == 8) {
+            sql += "AND (vicidial_log.`comments` IS NULL OR vicidial_log.`comments` ='auto' ) ";
+        }
+        if (reportTypeId == 4 || reportTypeId == 9) {
+            sql += "AND vicidial_log.`comments` ='manual' ";
+        }
+        
         sql += "AND vicidial_log.`campaign_id` IN (";
 
         String strSelectedServiceIds = "'";
@@ -132,9 +195,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ")";
-        System.out.println("sql = "+sql);
-        System.out.println("startDate = "+ startDate);
-        System.out.println("endDate = "+ endDate);
+                
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -185,7 +246,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
-
+      
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {

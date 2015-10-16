@@ -43,7 +43,7 @@
                         <li>
                             <a href='#'>User</a>
                             <ul>
-                                <li> <a href="adduser.htm">Add User</a></li>
+                                <li> <a href="addUser.htm">Add User</a></li>
                                 <li> <a href="userList.htm">List User</a></li>
 
                             </ul>

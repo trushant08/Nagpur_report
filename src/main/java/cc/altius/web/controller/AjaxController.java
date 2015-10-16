@@ -79,7 +79,6 @@ public class AjaxController {
         Type typeList = new TypeToken<GroupList>() {
         }.getType();
         json = gson.toJson(groupList, typeList);
-        System.out.println("json" +json);
         return json;
 
     }

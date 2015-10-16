@@ -39,7 +39,7 @@
         <intercept-url pattern="/serviceAdd.htm*" access="hasRole('ROLE_BF_ADD_SERVICE')"/>
         <intercept-url pattern="/serviceList.htm*" access="hasRole('ROLE_BF_LIST_SERVICE')"/>
         <intercept-url pattern="/serviceEdit.htm*" access="hasRole('ROLE_BF_EDIT_SERVICE')"/>
-        <intercept-url pattern="/adduser.htm*" access="hasRole('ROLE_BF_ADD_USER')"/>
+        <intercept-url pattern="/addUser.htm*" access="hasRole('ROLE_BF_ADD_USER')"/>
         <intercept-url pattern="/userList.htm*" access="hasRole('ROLE_BF_LIST_USER')"/>
         <intercept-url pattern="/showEditUser.htm*" access="hasRole('ROLE_BF_EDIT_USER')"/>
         <intercept-url pattern="/goAutoDialerReport.htm*" access="hasRole('ROLE_BF_SHOW_REPORT')"/>
