@@ -93,7 +93,7 @@ public class MaricoLeadController {
             leadList.add(lead);
         }
         int id = 0;
-        if (submit.equals("Pass to Nagpur")) {
+        if (submit.equals("Push to Dialer")) {
             id = this.maricoLeadService.insertLeadsIntoDailer(leadList, "Nagpur");
         } else if (submit.equals("Export lead for Nagpur")) {
             leadList.clear();

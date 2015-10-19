@@ -71,7 +71,7 @@
                     </tbody>
                 </table>
                 <br/><br/><br/>
-                <input class="userInputFormSubmit" type="submit" value="Pass to Nagpur" name="submit" /> 
+                <input class="userInputFormSubmit" type="submit" value="Push to Dialer" name="submit" /> 
                 <!--                <input  type="submit" name="submit" value="Export lead for Nagpur" class="userInputFormSubmit"> 
                                 <input  type="submit" name="submit" value="Dialed for Nagpur" class="userInputFormSubmit">-->
                 <input class="userInputFormSubmit" type="submit" value="Reject" name="submit" /> 

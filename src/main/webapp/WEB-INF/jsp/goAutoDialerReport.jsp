@@ -99,8 +99,8 @@
                             <td  style="height: 35px">Select Zone<br/>
                                 <form:select path="zone.zoneId" class="userInput">
                                     <form:option value="0">IST</form:option>
-                                    <form:option value="1">PST</form:option>
-                                    <form:option value="2">EST</form:option>
+                                    <%--<form:option value="1">PST</form:option>
+                                    <form:option value="2">EST</form:option>--%>
                                 </form:select>
                             </td><br/>&nbsp
 
