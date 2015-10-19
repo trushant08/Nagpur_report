@@ -1383,9 +1383,9 @@ table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .ta
     background-color: #a9c3e1;/*#cbdcef;e39251;*/
     cursor: pointer;
 }
-.userInputFormSubmit,.userInputFilterSubmit {
+/*.userInputFormSubmit,.userInputFilterSubmit {
     width: 80px;
-}
+}*/
 .userInputFormSubmitSmall {
     padding: 3px 0px;
     width: 40px;

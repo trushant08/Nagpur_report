@@ -56,12 +56,12 @@ public class AdminController {
     @RequestMapping(value = "reportTypeEdit.htm", method = RequestMethod.GET)
     public String onEditReportTypeGet(HttpServletRequest request, ModelMap modelMap) {
         int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportTypeId", 0);
-        
+
         ReportType reportType = this.adminService.getReportTypeObjByReportTypeId(reportTypeId);
         modelMap.addAttribute("reportType", reportType);
         List<ServerType> serverTypeList = this.adminService.getServerTypeList();
         modelMap.addAttribute("serverTypeList", serverTypeList);
-        
+
         reportType.setActive(reportType.isActive());
         return "reportTypeEdit";
     }
@@ -69,7 +69,7 @@ public class AdminController {
     @RequestMapping(value = "reportTypeEdit.htm", method = RequestMethod.POST)
     public String onEditReportTypePost(ModelMap modelMap, @ModelAttribute("reportType") ReportType reportType) {
         this.adminService.updateReportType(reportType);
-        
+
         return "redirect:reportTypeList.htm";
     }
 
@@ -100,12 +100,12 @@ public class AdminController {
     @RequestMapping(value = "groupEdit.htm", method = RequestMethod.GET)
     public String onEditGroupGet(HttpServletRequest request, ModelMap modelMap) {
         int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
-        
+
         Group group = this.adminService.getGroupObjByGroupId(groupId);
         modelMap.addAttribute("group", group);
         List<ServerType> serverTypeList = this.adminService.getServerTypeList();
         modelMap.addAttribute("serverTypeList", serverTypeList);
-        
+
         group.setActive(group.isActive());
         return "groupEdit";
     }
@@ -160,7 +160,7 @@ public class AdminController {
     //Mapping:
     @RequestMapping(value = "mapReportTypeGroup.htm", method = RequestMethod.GET)
     public String mappingGroup(ModelMap modelMap) {
-        
+
         List<ServerType> serverTypeList = this.adminService.getServerTypeList();
         modelMap.addAttribute("serverTypeList", serverTypeList);
         return "mapReportTypeGroup";
@@ -178,8 +178,7 @@ public class AdminController {
             return "redirect:/index.htm?&msg=msg.successfullyAddedData";
         }
     }
-    
-    
+
     @RequestMapping(value = "mapGroupService.htm", method = RequestMethod.GET)
     public String mappingService(ModelMap modelMap) {
         List<ServerType> serverTypeList = this.adminService.getServerTypeList();

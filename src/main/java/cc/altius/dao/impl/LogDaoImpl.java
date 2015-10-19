@@ -31,17 +31,14 @@ public class LogDaoImpl implements LogDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    /**Method used to get the access log
+    /**
+     * Method used to get the access log
      *
-     * @param ip
-     * ip used to get ip address
-     * @param username
-     * username used to get access log
+     * @param ip ip used to get ip address
+     * @param username username used to get access log
      * @param userId
-     * @param success
-     * success used to get the status succeed/failed
-     * @param outcome
-     * outcome used to get the reason behind success/failure
+     * @param success success used to get the status succeed/failed
+     * @param outcome outcome used to get the reason behind success/failure
      */
     @Override
     public void accessLog(String ip, String username, Integer userId, boolean success, String outcome) {

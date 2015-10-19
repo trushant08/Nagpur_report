@@ -4,7 +4,6 @@
  */
 package cc.altius.framework;
 
-
 /**
  *
  *
@@ -34,5 +33,5 @@ public class GlobalConstants {
      * "10.1.2.1-10.1.2.254","10.1.3.1-10.1.3.254"}
      *
      */
-    public static String[] ALLOWED_IP_RANGE = new String[]{"127.0.0.1", "10.1.0.225", "10.1.2.1-10.1.2.254", "10.1.3.1-10.1.3.254"};
+    public static String[] ALLOWED_IP_RANGE = new String[]{"127.0.0.1", "10.1.0.1-10.1.0.254"};
 }

@@ -32,7 +32,7 @@ public class LogUtils {
         e.printStackTrace(new PrintWriter(sWriter));
         return (new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(sWriter.toString()).toString());
     }
-    
+
     public static String buildStringForAccessLog(Exception e) {
         StringWriter sWriter = new StringWriter();
         e.printStackTrace(new PrintWriter(sWriter));
@@ -53,7 +53,7 @@ public class LogUtils {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     public static String buildStringForAccessLog(String sqlString, Map<String, Object> params) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(sqlString).append(" -- parameters(");
         boolean firstRun = true;
@@ -68,7 +68,7 @@ public class LogUtils {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     public static String buildStringForSystemLog(String sqlString, Object[] params) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(sqlString).append(" -- parameters(");
         boolean firstRun = true;
@@ -83,6 +83,7 @@ public class LogUtils {
         sb.append(")");
         return (sb.toString());
     }
+
     public static String buildStringForAccessLog(String sqlString, Object[] params) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(sqlString).append(" -- parameters(");
         boolean firstRun = true;
@@ -117,13 +118,13 @@ public class LogUtils {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     public static String buildStringForSystemLog(String msg) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(msg);
         System.out.println(sb);
         return sb.toString();
     }
-    
+
     public static String buildStringForAccessLog(String msg) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(msg);
         return sb.toString();

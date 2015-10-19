@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="common/script.jsp" %>
         <%@include file="common/title.jsp"%>
-        
+
         <script>
             function checkPassword() {
                 if (document.getElementById("newPassword").value!=document.getElementById("confirmPassword").value || document.getElementById("newPassword").value=="") {                   
@@ -30,7 +30,7 @@
         </script>
     </head>
     <body>
-        
+
         <div class="in_02">
             <%@include file="common/message.jsp" %>
             <form:form commandName="password" method="POST" onsubmit="return checkPassword();">
@@ -45,12 +45,12 @@
                         <tr><td><spring:message code="confirmNewPassword"/><br/><input type="password" id="confirmPassword"/></td></tr>
                         <tr>
                             <td>
-                        <spring:hasBindErrors name="password">
-                            <div class="error">
-                                <form:errors path="*"/>
-                            </div>
-                        </spring:hasBindErrors>
-                        </td>
+                                <spring:hasBindErrors name="password">
+                                    <div class="error">
+                                        <form:errors path="*"/>
+                                    </div>
+                                </spring:hasBindErrors>
+                            </td>
                         </tr>
                         <tr><td style="text-align: right"><input type="submit" class="userInputFormSubmit" name="_update" value="<spring:message code="button.Update"/>"  onsubmit="return checkPassword();"/>&nbsp;&nbsp;<a href="j_spring_security_logout"><spring:message code="menu.logout"/></a></td></tr>
                     </table>

@@ -92,12 +92,12 @@ public class UserController {
 
     @RequestMapping(value = "addUser.htm", method = RequestMethod.POST)
     public String onAddUserSubmit(@ModelAttribute("user") User user, Errors errors, ModelMap model, HttpServletRequest request) {
-        
+
         CustomUserDetails curUser = (CustomUserDetails) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         String cancel = ServletRequestUtils.getStringParameter(request, "_cancel", null);
         if (cancel != null) {
             user = null;
-            
+
             return "redirect:userList.htm?msg=msg.actionCancelled";
         } else {
             if (this.userService.existUserByUsername(user.getUsername())) {
@@ -167,7 +167,7 @@ public class UserController {
         user = null;
         return "redirect:userList.htm?msg=msg.actionCancelled";
     }
-    
+
     @RequestMapping(value = "userFailedAttemptsReset.htm", method = RequestMethod.POST)
     public String userFailedAttemptsReset(@RequestParam(value = "userId", required = true) int userId) {
         this.userService.resetFailedAttempts(userId);

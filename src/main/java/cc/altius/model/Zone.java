@@ -15,7 +15,6 @@ public class Zone implements Serializable {
     public static final int IST = 0;
     public static final int PST = 1;
     public static final int EST = 2;
-    
     private int zoneId;
     private String zoneDesc;
 
@@ -31,15 +30,14 @@ public class Zone implements Serializable {
         this.zoneId = zoneId;
         switch (zoneId) {
             case 0:
-                this.zoneDesc="IST";
+                this.zoneDesc = "IST";
                 break;
             case 1:
-                this.zoneDesc="PST";
+                this.zoneDesc = "PST";
                 break;
-            case 2: 
-                this.zoneDesc="EST";
+            case 2:
+                this.zoneDesc = "EST";
                 break;
         }
     }
-    
 }

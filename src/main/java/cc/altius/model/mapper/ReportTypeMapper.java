@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author sagar
  */
 public class ReportTypeMapper implements RowMapper<ReportType> {
-    
+
     @Override
     public ReportType mapRow(ResultSet rs, int i) throws SQLException {
         ReportType reportType = new ReportType();

@@ -21,7 +21,6 @@ public class SuccessEvent implements ApplicationListener<AuthenticationSuccessEv
 
     @Autowired
     private UserService userService;
-    
     @Autowired
     private LogService logService;
 
@@ -30,8 +29,8 @@ public class SuccessEvent implements ApplicationListener<AuthenticationSuccessEv
         System.out.println("Inside the success event");
         CustomUserDetails curUser = (CustomUserDetails) e.getAuthentication().getPrincipal();
         this.userService.loginSuccessUpdateForUserId(curUser.getUserId());
-        this.logService.accessLog(((WebAuthenticationDetails)e.getAuthentication().getDetails()).getRemoteAddress(), curUser.getUsername(), curUser.getUserId(), true, "Success");
-        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("User Found with username " +curUser.getUsername()));
-        LogUtils.accessLogger.info(LogUtils.buildStringForAccessLog("User Found with username " +curUser.getUsername()));
+        this.logService.accessLog(((WebAuthenticationDetails) e.getAuthentication().getDetails()).getRemoteAddress(), curUser.getUsername(), curUser.getUserId(), true, "Success");
+        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("User Found with username " + curUser.getUsername()));
+        LogUtils.accessLogger.info(LogUtils.buildStringForAccessLog("User Found with username " + curUser.getUsername()));
     }
 }

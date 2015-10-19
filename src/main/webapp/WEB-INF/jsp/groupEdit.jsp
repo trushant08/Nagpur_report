@@ -24,7 +24,7 @@
                     <form:hidden path="groupId" value="${groupId}"/>
                     Group Name: 
                     <form:input path="groupDesc" value="${groupDesc}"/><br><br/>
-                    
+
                     Server Type: &nbsp;
                     <form:select path="serverType.serverTypeId" class="userInput"> 
                         <form:option value="">${serverType.serverTypeDesc}</form:option>
@@ -32,7 +32,7 @@
                             <form:option value="${serverType.serverTypeId}">${serverType.serverTypeDesc}</form:option>
                         </c:forEach>
                     </form:select><br><br>
-                    
+
                     Active  : Yes <form:radiobutton path="active" value="true"/>&nbsp;&nbsp;&nbsp;No <form:radiobutton path="active" value="false"/><br><br/>
                     <input class="userInputFormSubmit" type="submit" value="Save" name="btnSubmit"/>
                 </fieldset>

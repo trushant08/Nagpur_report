@@ -55,7 +55,7 @@ public class ExcelController {
 
             int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
             String selectedServiceIds[] = ServletRequestUtils.getStringParameters(request, "selectedServiceIds");
-            
+
             String startDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(startDate);
 
             String endDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(endDate);
@@ -69,7 +69,7 @@ public class ExcelController {
                 if (zoneId == TIME_IST) {
 
                     list = this.goAutoDialerService.goAutoDialerInboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
-                   
+
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
                     response.setContentType("application/vnd.ms-excel");
@@ -244,7 +244,7 @@ public class ExcelController {
                 if (zoneId == TIME_IST) {
 
                     list = this.goAutoDialerService.getGoAutoDialerInboundList(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
-                    
+
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
                     response.setContentType("application/vnd.ms-excel");

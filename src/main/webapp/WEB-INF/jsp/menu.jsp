@@ -57,10 +57,16 @@
                     <a href='#'>Report</a>
                     <ul> 
                         <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK5">
-                        <li> <a href='goAutoDialerReport.htm?id=1'>Nagpur GoAuto Dialer Report (5)</a></li>
+                            <li> <a href='goAutoDialerReport.htm?id=1'>Nagpur GoAuto Dialer Report (5)</a></li>
                         </sec:authorize>
                         <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK14">
-                        <li> <a href='goAutoDialerReport.htm?id=2'>Nagpur GoAuto Dialer Report (14)</a></li>
+                            <li> <a href='goAutoDialerReport.htm?id=2'>Nagpur GoAuto Dialer Report (14)</a></li>
+                        </sec:authorize>
+                        <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_MARICO_DSR_REPORT">
+                            <li> <a href='maricoDialerReport.htm'>Marico Dialer Lead Report</a></li>
+                        </sec:authorize>
+                        <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_OPEN_DSR_LEAD_REPORT">
+                            <li> <a href='openDSRLeadReport.htm'>Open DSR Leads</a></li>
                         </sec:authorize>
                     </ul>
                 </li>

@@ -78,7 +78,9 @@ public class CommonUtils {
     }
 
     public static Date dateConverte_PST_To_IST(Date inputDate) throws ParseException {
-        if (inputDate==null) return null;
+        if (inputDate == null) {
+            return null;
+        }
         DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
@@ -91,7 +93,9 @@ public class CommonUtils {
     }
 
     public static Date dateConverte_IST_To_PST(Date inputDate) throws ParseException {
-        if (inputDate==null) return null;
+        if (inputDate == null) {
+            return null;
+        }
         DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
@@ -104,7 +108,9 @@ public class CommonUtils {
     }
 
     public static Date dateConverte_IST_To_EST(Date inputDate) throws ParseException {
-        if (inputDate==null) return null;
+        if (inputDate == null) {
+            return null;
+        }
         DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
@@ -116,8 +122,11 @@ public class CommonUtils {
         return outputDate;
 
     }
+
     public static Date dateConverte_EST_To_IST(Date inputDate) throws ParseException {
-        if (inputDate==null) return null;
+        if (inputDate == null) {
+            return null;
+        }
         DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
@@ -129,9 +138,12 @@ public class CommonUtils {
         return outputDate;
 
     }
+
     public static Date dateConverte_EST_To_PST(Date inputDate) throws ParseException {
-         if (inputDate==null) return null;
-         DateFormat df = new SimpleDateFormat(YMDHM);
+        if (inputDate == null) {
+            return null;
+        }
+        DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
         dateFormat.setTimeZone(TimeZone.getTimeZone(DateUtils.EST));
@@ -143,9 +155,12 @@ public class CommonUtils {
 
 
     }
-     public static Date dateConverte_PST_To_EST(Date inputDate) throws ParseException {
-         if (inputDate==null) return null;
-         DateFormat df = new SimpleDateFormat(YMDHM);
+
+    public static Date dateConverte_PST_To_EST(Date inputDate) throws ParseException {
+        if (inputDate == null) {
+            return null;
+        }
+        DateFormat df = new SimpleDateFormat(YMDHM);
         String strInputDate = df.format(inputDate);
         DateFormat dateFormat = new SimpleDateFormat(YMDHM);
         dateFormat.setTimeZone(TimeZone.getTimeZone(DateUtils.PST));

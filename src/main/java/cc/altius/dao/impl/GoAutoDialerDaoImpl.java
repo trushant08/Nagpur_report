@@ -90,7 +90,9 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
         }
         sql += strSelectedServiceIds + ")";
-     
+        System.out.println("sql = " + sql);
+        System.out.println("startDate = " + startDate);
+        System.out.println("stopDate = " + endDate);
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -103,7 +105,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         }
         return report;
     }
-    
+
     //GoAuto Dialer Inbound Report
     @Override
     public List<Map<String, Object>> getGoAutoDialerInboundList(String startDate, String endDate, String[] selectedServiceIds, int id) {
@@ -137,7 +139,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 + " where vicidial_did_log.`call_date` >=? and "
                 + " vicidial_did_log.`call_date` <=? and "
                 + " vicidial_inbound_dids.`did_id` IN (";
-        
+
         String strSelectedServiceIds = "";
         for (String i : selectedServiceIds) {
             strSelectedServiceIds += i + ",";
@@ -146,9 +148,11 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
         }
         sql += strSelectedServiceIds + ")";
-        
+        System.out.println("sql = " + sql);
+        System.out.println("startDate = " + startDate);
+        System.out.println("stopDate = " + endDate);
         List<Map<String, Object>> report = null;
-        
+
         try {
             if (id == 1) {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
@@ -184,7 +188,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         if (reportTypeId == 4 || reportTypeId == 9) {
             sql += "AND vicidial_log.`comments` ='manual' ";
         }
-        
+
         sql += "AND vicidial_log.`campaign_id` IN (";
 
         String strSelectedServiceIds = "'";
@@ -195,7 +199,9 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ")";
-                
+        System.out.println("sql = " + sql);
+        System.out.println("startDate = " + startDate);
+        System.out.println("stopDate = " + endDate);
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -246,7 +252,9 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
-      
+        System.out.println("sql = " + sql);
+        System.out.println("startDate = " + startDate);
+        System.out.println("stopDate = " + endDate);
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {

@@ -32,7 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private LogDao logDao;
-    
     @Autowired
     private UserDao userDao;
     private Set<String> allowedIpRange;
@@ -66,17 +65,17 @@ public class CustomUserDetailsService implements UserDetailsService {
                     user.setBusinessFunction(this.userDao.getBusinessFunctionsForUserId(user.getUserId()));
                     System.out.println(user);
                 }
-            }   
+            }
             return user;
         } catch (Exception e) {
             throw new UsernameNotFoundException("Username not found");
         }
     }
-    
+
     private boolean checkIfIpIsFromAllowedRange(String ipToCheck) {
         for (String curRange : this.allowedIpRange) {
             IPUtils curIpRange = new IPUtils(curRange);
-            if(curIpRange.checkIP(ipToCheck)) {
+            if (curIpRange.checkIP(ipToCheck)) {
                 return true;
             }
         }

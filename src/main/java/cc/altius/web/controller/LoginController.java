@@ -16,18 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class LoginController {
-    
+
     private @Value("#{versionProperties['version.major']}")
     String majorVersion;
-    
     private @Value("#{versionProperties['version.minor']}")
     String minorVersion;
-    
+
     @RequestMapping("/login.htm")
     public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
         model.addAttribute("majorVersion", majorVersion);
         model.addAttribute("minorVersion", minorVersion);
-        
+
         return "login";
     }
 }

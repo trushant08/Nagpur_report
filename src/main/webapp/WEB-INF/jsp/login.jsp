@@ -57,17 +57,17 @@
                                 <span style="float:left;">Designed and built by Altius Customer Services Pvt Ltd</span>
                             </div>
                             <div class="" style="float: left; clear: both; margin-top: 32px; margin-left: 128px;">
-                            <!-- start error message -->
-                            <c:if test="${param.login_error=='true'}">
-                                <p id="baderror">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
-                            </c:if>
-                            <c:if test="${param.errorMsg=='locked'}">
-                                <span id="baderror">Your account has been locked. Please contact an Administrator.</span>
-                            </c:if>
-                            <c:if test="${param.errorMsg=='credentials'}">
-                                <span id="baderror">Incorrect username or password entered.</span>
-                            </c:if>
-                            <!-- end error message -->
+                                <!-- start error message -->
+                                <c:if test="${param.login_error=='true'}">
+                                    <p id="baderror">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+                                </c:if>
+                                <c:if test="${param.errorMsg=='locked'}">
+                                    <span id="baderror">Your account has been locked. Please contact an Administrator.</span>
+                                </c:if>
+                                <c:if test="${param.errorMsg=='credentials'}">
+                                    <span id="baderror">Incorrect username or password entered.</span>
+                                </c:if>
+                                <!-- end error message -->
                             </div>
                         </div>
                     </div>

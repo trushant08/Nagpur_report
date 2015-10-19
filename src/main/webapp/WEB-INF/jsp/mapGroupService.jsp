@@ -318,42 +318,42 @@
                                 <option value="${group.groupId}">${group.groupDesc}</option>
                             </c:forEach>
                         </select>
-                   </div><br>
+                    </div><br>
 
-                     <div class="span3" style="float:left">
-                            <label>Non Selected Service List:</label>
-                            <div class="input-append">
-                                <select id="assignFrom" name="assignFrom" multiple size="8" style="width: 220px;">
-                                    <c:forEach items="${serviceList.nonAssignedList}" var="nonAssignedService">
-                                        <option value="${nonAssignedService.serviceId}">${nonAssignedService.serviceName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
+                    <div class="span3" style="float:left">
+                        <label>Non Selected Service List:</label>
+                        <div class="input-append">
+                            <select id="assignFrom" name="assignFrom" multiple size="8" style="width: 220px;">
+                                <c:forEach items="${serviceList.nonAssignedList}" var="nonAssignedService">
+                                    <option value="${nonAssignedService.serviceId}">${nonAssignedService.serviceName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
-                        <div class="span1"  style="float:left; padding-left: 20px;padding-top: 15px">
+                    </div>
+                    <div class="span1"  style="float:left; padding-left: 20px;padding-top: 15px">
+                        <label>&nbsp;</label>
+                        <label>&nbsp;</label>
+                        <div class="input-append">
+                            <input type="button" id="gtAssign" name="gtAssign" value=">" class="span2" style="width: 40px;background-color: #02565b;color: #fff;" onclick="addAssign();" onclick="return yav.performCheck('form1', rules, 'inline');"/>
                             <label>&nbsp;</label>
-                            <label>&nbsp;</label>
-                            <div class="input-append">
-                                <input type="button" id="gtAssign" name="gtAssign" value=">" class="span2" style="width: 40px;background-color: #02565b;color: #fff;" onclick="addAssign();" onclick="return yav.performCheck('form1', rules, 'inline');"/>
-                                <label>&nbsp;</label>
-                                <input type="button" id="ltAssign" name="ltAssign" value="<" class="span2" style="width: 40px;background-color: #02565b;color: #fff;" onclick="removeAssign();"/>
-                            </div>
+                            <input type="button" id="ltAssign" name="ltAssign" value="<" class="span2" style="width: 40px;background-color: #02565b;color: #fff;" onclick="removeAssign();"/>
                         </div>
+                    </div>
 
 
-                        <div class="span4" style="float:left; padding-left: 20px">
-                            <label>Selected Service List:</label>
-                            <div class="input-append">
-                                <select id="assignTo" name="assignTo" multiple size="8" style="width: 220px;">
-                                    <c:forEach items="${serviceList.assignedList}" var="assignedService">
-                                        <option value="${assignedService.serviceId}">${assignedService.serviceName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <span>&nbsp;</span><span id="errorsDiv_assignTo">&nbsp;</span>
+                    <div class="span4" style="float:left; padding-left: 20px">
+                        <label>Selected Service List:</label>
+                        <div class="input-append">
+                            <select id="assignTo" name="assignTo" multiple size="8" style="width: 220px;">
+                                <c:forEach items="${serviceList.assignedList}" var="assignedService">
+                                    <option value="${assignedService.serviceId}">${assignedService.serviceName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
-                        <input type="hidden" id="finalAssignServices" name="finalAssignServices"/>
-                    
+                        <span>&nbsp;</span><span id="errorsDiv_assignTo">&nbsp;</span>
+                    </div>
+                    <input type="hidden" id="finalAssignServices" name="finalAssignServices"/>
+
                     <div class="span3">
                         <label>&nbsp;</label>
                         <div class="input-append">

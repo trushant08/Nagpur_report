@@ -61,14 +61,14 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public List<ServerType> getServerTypeList() {
         String sql = "SELECT * FROM server_type";
-        
+
         return this.jdbcTemplate.query(sql, new ServerTypeMapper());
     }
 
     @Override
     public List<ReportType> getReportTypeList() {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,rt.* FROM report_types rt"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`";
         return this.jdbcTemplate.query(sql, new ReportTypeMapper());
     }
 
@@ -85,8 +85,8 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public ReportType getReportTypeObjByReportTypeId(int reportTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,rt.* FROM report_types rt"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`"
-                    +" WHERE REPORT_TYPE_ID=?";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`"
+                + " WHERE REPORT_TYPE_ID=?";
         return this.jdbcTemplate.queryForObject(sql, new ReportTypeMapper(), reportTypeId);
     }
 
@@ -106,7 +106,7 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public List<Group> getGroupList() {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`";
         return this.jdbcTemplate.query(sql, new GroupMapper());
     }
 
@@ -123,8 +123,8 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public Group getGroupObjByGroupId(int groupId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`"
-                    +" WHERE GROUP_ID=?";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`"
+                + " WHERE GROUP_ID=?";
         return this.jdbcTemplate.queryForObject(sql, new GroupMapper(), groupId);
     }
 
@@ -145,7 +145,7 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public List<Service> getServiceList() {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,s.* FROM service s"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=s.`SERVER_TYPE_ID`";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=s.`SERVER_TYPE_ID`";
         return this.jdbcTemplate.query(sql, new ServiceMapper());
     }
 
@@ -162,36 +162,35 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public Service getServiceObjByServiceId(int serviceId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,s.* FROM service s"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=s.`SERVER_TYPE_ID`"
-                    +" WHERE SERVICE_ID=?";
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=s.`SERVER_TYPE_ID`"
+                + " WHERE SERVICE_ID=?";
         return this.jdbcTemplate.queryForObject(sql, new ServiceMapper(), serviceId);
     }
 
     @Override
     public List<ReportType> getReportTypeListByserverTypeId(int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,rt.* FROM report_types rt"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`"
-                    +" WHERE rt.`SERVER_TYPE_ID`=? ";
-        return this.jdbcTemplate.query(sql, new ReportTypeMapper(),serverTypeId);
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=rt.`SERVER_TYPE_ID`"
+                + " WHERE rt.`SERVER_TYPE_ID`=? ";
+        return this.jdbcTemplate.query(sql, new ReportTypeMapper(), serverTypeId);
     }
 
-    
     @Override
     public List<Group> getMappedGroupListByReportType(int reportTypeId, int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
-                    +" LEFT JOIN report_type_group rtg ON rtg.`GROUP_ID`=g.`GROUP_ID`"
-                    +" LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE REPORT_TYPE_ID=? AND g.`SERVER_TYPE_ID`=?";
+                + " LEFT JOIN report_type_group rtg ON rtg.`GROUP_ID`=g.`GROUP_ID`"
+                + " LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
+                + " WHERE REPORT_TYPE_ID=? AND g.`SERVER_TYPE_ID`=?";
         return this.jdbcTemplate.query(sql, new GroupMapper(), reportTypeId, serverTypeId);
     }
 
     @Override
     public List<Group> getGroupListNotMapped(int reportTypeId, int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
-                    +" LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE GROUP_ID NOT IN"
-                    +" (SELECT GROUP_ID FROM report_type_group WHERE REPORT_TYPE_ID =?)"
-                    + "AND g.`SERVER_TYPE_ID`=? AND g.`ACTIVE`=1";
+                + " LEFT JOIN server_type st ON g.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
+                + " WHERE GROUP_ID NOT IN"
+                + " (SELECT GROUP_ID FROM report_type_group WHERE REPORT_TYPE_ID =?)"
+                + "AND g.`SERVER_TYPE_ID`=? AND g.`ACTIVE`=1";
         return this.jdbcTemplate.query(sql, new GroupMapper(), reportTypeId, serverTypeId);
     }
 
@@ -218,27 +217,27 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public List<Group> getGroupListByserverTypeId(int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,g.* FROM groups g"
-                    +" LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`"
-                    +" WHERE g.`SERVER_TYPE_ID`=?";
-        return this.jdbcTemplate.query(sql, new GroupMapper(),serverTypeId);
+                + " LEFT JOIN server_type st ON st.`SERVER_TYPE_ID`=g.`SERVER_TYPE_ID`"
+                + " WHERE g.`SERVER_TYPE_ID`=?";
+        return this.jdbcTemplate.query(sql, new GroupMapper(), serverTypeId);
     }
-    
+
     @Override
     public List<Service> getMappedServiceListByGroup(int groupId, int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,s.* FROM service s"
-                    +" LEFT JOIN service_group sg ON sg.`SERVICE_ID`=s.`SERVICE_ID`"
-                    +" LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE GROUP_ID=? AND s.`SERVER_TYPE_ID`=?";
+                + " LEFT JOIN service_group sg ON sg.`SERVICE_ID`=s.`SERVICE_ID`"
+                + " LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
+                + " WHERE GROUP_ID=? AND s.`SERVER_TYPE_ID`=?";
         return this.jdbcTemplate.query(sql, new ServiceMapper(), groupId, serverTypeId);
     }
 
     @Override
     public List<Service> getServiceListNotMapped(int groupId, int serverTypeId) {
         String sql = "SELECT st.`SERVER_TYPE_DESC`,s.* FROM service s"
-                    +" LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
-                    +" WHERE SERVICE_ID NOT IN"
-                    +" (SELECT SERVICE_ID FROM service_group WHERE GROUP_ID =?)"
-                    +" AND s.`SERVER_TYPE_ID`=? AND s.`ACTIVE`=1";
+                + " LEFT JOIN server_type st ON s.`SERVER_TYPE_ID`=st.`SERVER_TYPE_ID`"
+                + " WHERE SERVICE_ID NOT IN"
+                + " (SELECT SERVICE_ID FROM service_group WHERE GROUP_ID =?)"
+                + " AND s.`SERVER_TYPE_ID`=? AND s.`ACTIVE`=1";
         return this.jdbcTemplate.query(sql, new ServiceMapper(), groupId, serverTypeId);
     }
 

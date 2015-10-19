@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class IndexController {
+
     @RequestMapping(value = "/index.htm", method = RequestMethod.GET)
     public String getHome() {
-    
+
 //        CustomUserDetails curUser = (CustomUserDetails) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 //        map.addAttribute("bfList", curUser.getAuthorities());
-        
+
         return "/home";
     }
 }

@@ -5,7 +5,6 @@
 package cc.altius.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *

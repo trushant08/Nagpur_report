@@ -36,7 +36,7 @@ public class AjaxController {
     @RequestMapping(value = "ajaxGetGroupListForReportTypeId.htm", method = RequestMethod.GET)
     public @ResponseBody
     String doAjaxGetGroupListForReportTypeId(@RequestParam(value = "reportTypeId") int reportTypeId,
-                                             @RequestParam(value = "id") int id) {
+            @RequestParam(value = "id") int id) {
 
         String json;
         List<Group> groupList;
@@ -53,9 +53,9 @@ public class AjaxController {
     @RequestMapping(value = "ajaxGetServiceListForGroupId.htm", method = RequestMethod.GET)
     public @ResponseBody
     String doAjaxGetServiceListForGroupId(@RequestParam(value = "groupId") int groupId,
-                                          @RequestParam(value = "id") int id) {
+            @RequestParam(value = "id") int id) {
         String json;
-        List<Service> serviceList = this.adminService.getMappedServiceListByGroup(groupId,id);
+        List<Service> serviceList = this.adminService.getMappedServiceListByGroup(groupId, id);
 
         Gson gson = new Gson();
         Type typeList = new TypeToken<List>() {
@@ -66,11 +66,11 @@ public class AjaxController {
 
     @RequestMapping(value = "ajaxGetGroupListByReportTypeId.htm", method = RequestMethod.GET)
     public @ResponseBody
-    String doAjaxGetGroupListByReportTypeId(@RequestParam(value = "reportTypeId") int reportTypeId, 
-                                            @RequestParam(value = "serverTypeId")int serverTypeId) {
+    String doAjaxGetGroupListByReportTypeId(@RequestParam(value = "reportTypeId") int reportTypeId,
+            @RequestParam(value = "serverTypeId") int serverTypeId) {
         String json;
-        List<Group> assignedList = this.adminService.getMappedGroupListByReportType(reportTypeId,serverTypeId);
-        List<Group> nonAssignedList = this.adminService.getGroupListNotMapped(reportTypeId,serverTypeId);
+        List<Group> assignedList = this.adminService.getMappedGroupListByReportType(reportTypeId, serverTypeId);
+        List<Group> nonAssignedList = this.adminService.getGroupListNotMapped(reportTypeId, serverTypeId);
         GroupList groupList = new GroupList();
         groupList.setAssignedList(assignedList);
         groupList.setNonAssignedList(nonAssignedList);
@@ -86,7 +86,7 @@ public class AjaxController {
     @RequestMapping(value = "ajaxGetServiceListByGroupId.htm", method = RequestMethod.GET)
     public @ResponseBody
     String doAjaxGetServiceListByGroupId(@RequestParam(value = "groupId") int groupId,
-                                         @RequestParam(value = "serverTypeId")int serverTypeId) {
+            @RequestParam(value = "serverTypeId") int serverTypeId) {
 
         String json;
         List<Service> assignedList = this.adminService.getMappedServiceListByGroup(groupId, serverTypeId);
@@ -114,11 +114,11 @@ public class AjaxController {
         Type typeList = new TypeToken<List>() {
         }.getType();
         json = gson.toJson(reportTypeList, typeList);
-        
+
         return json;
 
     }
-    
+
     @RequestMapping(value = "ajaxGetGroupListForServerTypeId.htm", method = RequestMethod.GET)
     public @ResponseBody
     String doAjaxGetGroupListForServerTypeId(@RequestParam(value = "serverTypeId") int serverTypeId) {
@@ -130,7 +130,7 @@ public class AjaxController {
         Type typeList = new TypeToken<List>() {
         }.getType();
         json = gson.toJson(groupList, typeList);
-        
+
         return json;
 
     }

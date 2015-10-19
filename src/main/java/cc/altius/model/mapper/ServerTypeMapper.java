@@ -20,8 +20,7 @@ public class ServerTypeMapper implements RowMapper<ServerType> {
         ServerType s = new ServerType();
         s.setServerTypeId(rs.getInt("SERVER_TYPE_ID"));
         s.setServerTypeDesc(rs.getString("SERVER_TYPE_DESC"));
-        
+
         return s;
     }
-    
 }

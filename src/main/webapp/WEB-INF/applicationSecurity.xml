@@ -43,6 +43,8 @@
         <intercept-url pattern="/userList.htm*" access="hasRole('ROLE_BF_LIST_USER')"/>
         <intercept-url pattern="/showEditUser.htm*" access="hasRole('ROLE_BF_EDIT_USER')"/>
         <intercept-url pattern="/goAutoDialerReport.htm*" access="hasRole('ROLE_BF_SHOW_REPORT')"/>
+        <intercept-url pattern="/maricoDialerReport.htm*" access="hasRole('ROLE_BF_MARICO_DSR_REPORT')"/>
+        <intercept-url pattern="/openDSRLeadReport.htm*" access="hasRole('ROLE_BF_OPEN_DSR_LEAD_REPORT')"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_BF_SHOW_HOME')" />
     </http>
 

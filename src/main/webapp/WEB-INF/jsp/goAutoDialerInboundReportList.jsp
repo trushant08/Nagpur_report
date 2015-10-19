@@ -21,19 +21,19 @@
                 <thead>
                     <tr class="header">
                         <th>Call Date(<c:choose><c:when test="${zoneId==0}">IST</c:when><c:when test="${zoneId==1}">PST</c:when><c:otherwise>EST</c:otherwise></c:choose>)</th>
-                        <th>Unique-Id</th>
-                        <th>Caller-Id</th>
-                        <th>Did Description </th>
-                        <th>Campaign</th>
-                        <th>Term Reason </th>
-                        <th>Status</th>                    
-                        <th>Length (sec)</th>                                    
-                        <th>Queue (sec)</th>  
-                        <th>User</th>
-                        <th>Call Date(EST)</th>
-                    </tr>
-                </thead>
-                <tbody>
+                                <th>Unique-Id</th>
+                                <th>Caller-Id</th>
+                                <th>Did Description </th>
+                                <th>Campaign</th>
+                                <th>Term Reason </th>
+                                <th>Status</th>                    
+                                <th>Length (sec)</th>                                    
+                                <th>Queue (sec)</th>  
+                                <th>User</th>
+                                <th>Call Date(EST)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                     <c:forEach var="userItem" items="${list}">
                         <tr class="">
                             <td><fmt:formatDate value="${userItem.convertedCallStartDt}" pattern="yyyy-MM-dd HH:mm"/></td>

@@ -18,7 +18,7 @@ public interface AdminService {
 
     //Report:
     public int addReportType(ReportType reportType);
-    
+
     public List<ServerType> getServerTypeList();
 
     public List<ReportType> getReportTypeList();
@@ -44,21 +44,21 @@ public interface AdminService {
     public void updateService(Service service);
 
     public Service getServiceObjByServiceId(int serviceId);
-    
+
     //Mapping:
     public List<ReportType> getReportTypeListByserverTypeId(int serverTypeId);
-    
+
     public List<Group> getMappedGroupListByReportType(int reportTypeId, int serverTypeId);
-    
+
     public List<Group> getGroupListNotMapped(int reportTypeId, int serverTypeId);
-    
+
     public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups, int serverTypeId);
-    
+
     public List<Group> getGroupListByserverTypeId(int serverTypeId);
-    
+
     public List<Service> getMappedServiceListByGroup(int groupId, int serverTypeId);
-    
+
     public List<Service> getServiceListNotMapped(int groupId, int serverTypeId);
-    
+
     public int insertGroupServiceMapping(int groupId, String[] assignServices, int serverTypeId);
 }

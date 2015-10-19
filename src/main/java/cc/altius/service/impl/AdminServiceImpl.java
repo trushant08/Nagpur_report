@@ -96,10 +96,9 @@ public class AdminServiceImpl implements AdminService {
         return this.adminDao.getReportTypeListByserverTypeId(serverTypeId);
     }
 
-    
     @Override
     public List<Group> getMappedGroupListByReportType(int reportTypeId, int serverTypeId) {
-        return this.adminDao.getMappedGroupListByReportType(reportTypeId,serverTypeId);
+        return this.adminDao.getMappedGroupListByReportType(reportTypeId, serverTypeId);
     }
 
     @Override
@@ -111,12 +110,12 @@ public class AdminServiceImpl implements AdminService {
     public int insertReportTypeGroupMapping(int reportTypeId, String[] assignGroups, int serverTypeId) {
         return this.adminDao.insertReportTypeGroupMapping(reportTypeId, assignGroups, serverTypeId);
     }
-    
+
     @Override
     public List<Group> getGroupListByserverTypeId(int serverTypeId) {
         return this.adminDao.getGroupListByserverTypeId(serverTypeId);
     }
-    
+
     @Override
     public List<Service> getMappedServiceListByGroup(int groupId, int serverTypeId) {
         return this.adminDao.getMappedServiceListByGroup(groupId, serverTypeId);

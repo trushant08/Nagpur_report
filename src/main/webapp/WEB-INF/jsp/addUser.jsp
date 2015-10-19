@@ -46,7 +46,7 @@
                             <label class="req"><spring:message code="role"/></label>
                             <form:select path="role.roleId" cssClass="form-control">
                                 <form:option value="" label="-"/>
-                                <form:options items="${roleList}" itemLabel="roleName" itemValue="roleId"/>
+                                <form:options items="${roleList}" itemLabel="roleId" itemValue="roleId"/>
                             </form:select>
                             <span id="errorsDiv_role.roleId"></span>
                         </div>
