@@ -33,7 +33,7 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${leadList}" var="maricoLeadItem">
-                                <tr class="row td">
+                                <tr class="">
                                     <td><c:out value="${maricoLeadItem.createdDate}"/></td>
                                     <td><c:out value="${maricoLeadItem.beatDiscription}"/></td>
                                     <td><c:out value="${maricoLeadItem.count}"/></a></td>

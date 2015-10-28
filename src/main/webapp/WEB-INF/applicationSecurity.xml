@@ -30,7 +30,7 @@
         <intercept-url pattern="/js/**" access="permitAll" />
         <intercept-url pattern="/badCredentials.htm" access="permitAll" />
         <intercept-url pattern="/accessDenied.htm*" access="isFullyAuthenticated()"/>
-        <intercept-url pattern="/updateExpiredPassword.htm*" access="permitAll"/>
+        <intercept-url pattern="/updateExpiredPassword.htm*" access="hasRole('ROLE_BF_PASSWORD_EXPIRED')"/>
         <intercept-url pattern="/reportTypeAdd.htm*" access="hasRole('ROLE_BF_ADD_REPORT_TYPE')"/>
         <intercept-url pattern="/reportTypeList.htm*" access="hasRole('ROLE_BF_LIST_REPORT_TYPE')"/>
         <intercept-url pattern="/reportTypeEdit.htm*" access="hasRole('ROLE_BF_EDIT_REPORT_TYPE')"/>
