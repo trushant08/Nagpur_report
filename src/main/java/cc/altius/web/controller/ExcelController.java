@@ -41,24 +41,22 @@ public class ExcelController {
     public void getExcelReport(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
+            int serverId = ServletRequestUtils.getIntParameter(request, "id", 0);
+            int zoneId = ServletRequestUtils.getIntParameter(request, "zoneId", 0);
             String startDate = ServletRequestUtils.getStringParameter(request, "startDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
             String endDate = ServletRequestUtils.getStringParameter(request, "stopDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
-            int serverId = ServletRequestUtils.getIntParameter(request, "id", 0);
-
+            
             //These dates are for Excel File Name.......(Used in Excel File Name)
-
             String startDateExcel = startDate.substring(0, 10);
             String endDateExcel = endDate.substring(0, 10);
 
-            int zoneId = ServletRequestUtils.getIntParameter(request, "zoneId", 0);
-            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);
-
-            int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
+            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);          
             String selectedServiceIds[] = ServletRequestUtils.getStringParameters(request, "selectedServiceIds");
-
-            String startDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(startDate);
-
-            String endDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(endDate);
+            
+            int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
+            
+//            String startDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(startDate);
+//            String endDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(endDate);
             String startDatePST_To_EST = CommonUtils.dateConverte_PST_To_EST(startDate);
             String endDatePST_To_EST = CommonUtils.dateConverte_PST_To_EST(endDate);
 
@@ -68,7 +66,7 @@ public class ExcelController {
             if (reportTypeId == 1 || reportTypeId == 6) {
                 if (zoneId == TIME_IST) {
 
-                    list = this.goAutoDialerService.goAutoDialerInboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
+                    list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -243,7 +241,7 @@ public class ExcelController {
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 if (zoneId == TIME_IST) {
 
-                    list = this.goAutoDialerService.getGoAutoDialerInboundList(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
+                    list = this.goAutoDialerService.getGoAutoDialerInboundList(startDate, endDate, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -407,7 +405,7 @@ public class ExcelController {
 
                 if (zoneId == TIME_IST) {
 
-                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, reportTypeId, serverId);
+                    list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=OutBoundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -537,7 +535,7 @@ public class ExcelController {
                 }
             } else { //OTHER reports Type
                 if (zoneId == TIME_IST) {
-                    list = this.goAutoDialerService.getAgentPerformanceReport(startDateIST_To_EST, endDateIST_To_EST, selectedServiceIds, serverId);
+                    list = this.goAutoDialerService.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, serverId);
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=AgentPerformance(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
