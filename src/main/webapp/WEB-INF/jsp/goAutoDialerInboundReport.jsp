@@ -38,7 +38,7 @@
                         <tbody>
                     <c:forEach items="${list}" var="listItem">
                         <tr class="">
-                            <td><fmt:formatDate value="${listItem.convertedCallStartDt}" pattern="yyyy-MM-dd HH:mm"/></td>
+                            <td><fmt:formatDate value="${listItem.call_date}" pattern="yyyy-MM-dd HH:mm"/></td>
                             <td><c:out value="${listItem.uniqueid}"/></td>
                             <td><c:out value="${listItem.caller_id_number}"/></td>
                             <td><c:out value="${listItem.did_description}"/></td>
@@ -50,7 +50,7 @@
                             <td><c:out value="${listItem.HoldTime}"/></td>
                             <td><c:out value="${listItem.wraptime}"/></td>
                             <td><c:out value="${listItem.user}"/></td>
-                            <td><fmt:formatDate value="${listItem.call_date}" pattern="yyyy-MM-dd HH:mm"/></td>
+                            <td><fmt:formatDate value="${listItem.convertedCallStartDt}" pattern="yyyy-MM-dd HH:mm"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>

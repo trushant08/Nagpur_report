@@ -29,10 +29,6 @@
                         <th>Not Ready</th>  
                         <th>Idle</th>
                         <th>Wrap Time</th>
-                        <c:if test="${reportTypeId == 25 || reportTypeId == 26 ||reportTypeId == 27 || reportTypeId == 28 }">
-                            <th>Hold Time</th>
-                            <th>Calls On Hold</th>
-                        </c:if>
                         <th>Total</th>
                         <th>Calls</th>
                         <th>L Break Time</th>
@@ -55,10 +51,6 @@
                             <td><c:out value="${listItem.notReady}"/></td>
                             <td><c:out value="${listItem.idle}"/></td>
                             <td><c:out value="${listItem.wrapTime   }"/></td>
-                            <c:if test="${reportTypeId == 25 || reportTypeId == 26 ||reportTypeId == 27 || reportTypeId == 28 }">
-                                <td><c:out value="${listItem.HoldTime}"/></td>    
-                                <td><c:out value="${listItem.CALLSONHOLD}"/></td>    
-                            </c:if>
                             <td><c:out value="${listItem.total}"/></td>
                             <td><c:out value="${listItem.calls}"/></td>
                             <td><c:out value="${listItem.lBreakTime}"/></td>

@@ -146,10 +146,6 @@
                 </fieldset>
             </form:form>
             <form name="excelForm" id="excelForm" method="post" action="reportExcel.htm">
-                <script type="text/javascript">
-                    var groupId=document.getElementById("group.groupId").value;
-                    document.getElementById("groupId").value=groupId;
-                </script>
                 <input type="hidden" name="zoneId" value="${zoneId}"/>
                 <input type="hidden" name="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${startDate}" />"/>
                 <input type="hidden" name="stopDate" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${endDate}" />"/>

@@ -131,7 +131,7 @@ public class GoAutoDialerController {
 
             for (Map<String, Object> m : list) {
                 Date t = (Date) m.get("call_date");
-                Date convertedDate = CommonUtils.dateConverte_EST_To_IST(t);
+                Date convertedDate = CommonUtils.dateConverte_IST_To_EST(t);
                 m.put("convertedCallStartDt", convertedDate);
             }
             modelMap.addAttribute("list", list);

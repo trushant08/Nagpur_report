@@ -17,8 +17,17 @@ import java.util.List;
 public interface AdminDao {
 
     //Report:
+    /**
+     *
+     * @param reportType
+     * @return
+     */
     public int addReportType(ReportType reportType);
 
+    /**
+     *
+     * @return
+     */
     public List<ServerType> getServerTypeList();
 
     public List<ReportType> getReportTypeList();

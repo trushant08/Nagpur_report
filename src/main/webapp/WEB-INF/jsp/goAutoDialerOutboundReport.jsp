@@ -35,14 +35,14 @@
                         <tbody>
                     <c:forEach items="${list}" var="listItem">
                         <tr class="">
-                            <td><fmt:formatDate value="${listItem.convertedCallStartDt}" pattern="yyyy-MM-dd HH:mm"/></td>
+                            <td><fmt:formatDate value="${listItem.call_date}" pattern="yyyy-MM-dd HH:mm"/></td>
                             <td><c:out value="${listItem.phone_number}"/></td>
                             <td><c:out value="${listItem.length_in_sec}"/></td>
                             <td><c:out value="${listItem.status}"/></td>
                             <td><c:out value="${listItem.term_reason}"/></td>
                             <td><c:out value="${listItem.user}"/></td>
                             <td><c:out value="${listItem.comments}"/></td>
-                            <td><fmt:formatDate value="${listItem.call_date}" pattern="yyyy-MM-dd HH:mm"/></td>
+                            <td><fmt:formatDate value="${listItem.convertedCallStartDt}" pattern="yyyy-MM-dd HH:mm"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>

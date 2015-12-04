@@ -97,7 +97,7 @@ public class ExcelController {
                         Date t = (Date) data.get("call_date");
 
                         if (t != null) {
-                            Date convertedDate = CommonUtils.dateConverte_EST_To_IST(t);
+                            Date convertedDate = CommonUtils.dateConverte_IST_To_EST(t);
 
                             call_dateString = DateUtils.convertDateToString(convertedDate, "yyyy-MM-dd HH:mm");
 
@@ -106,7 +106,7 @@ public class ExcelController {
 
                         POIRow dataRow = new POIRow();
 
-                        dataRow.addCell(call_dateString, POICell.TYPE_TEXT);
+                        dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("uniqueid"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("caller_id_number"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("did_description"), POICell.TYPE_TEXT);
@@ -118,7 +118,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("HoldTime"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("wraptime"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
-                        dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
+                        dataRow.addCell(call_dateString, POICell.TYPE_TEXT);
                         mySheet.addRow(dataRow);
                     }
                     mySheet.writeWorkBook();
@@ -270,7 +270,7 @@ public class ExcelController {
                         Date t = (Date) data.get("call_date");
 
                         if (t != null) {
-                            Date convertedDate = CommonUtils.dateConverte_EST_To_IST(t);
+                            Date convertedDate = CommonUtils.dateConverte_IST_To_EST(t);
 
                             call_dateString = DateUtils.convertDateToString(convertedDate, "yyyy-MM-dd HH:mm");
 
@@ -279,7 +279,7 @@ public class ExcelController {
 
                         POIRow dataRow = new POIRow();
 
-                        dataRow.addCell(call_dateString, POICell.TYPE_TEXT);
+                        dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("uniqueid"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("caller_id_number"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("did_description"), POICell.TYPE_TEXT);
@@ -289,7 +289,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("length_in_sec"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("queue_seconds"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
-                        dataRow.addCell(call_dateFormatted, POICell.TYPE_TEXT);
+                        dataRow.addCell(call_dateString, POICell.TYPE_TEXT);
                         mySheet.addRow(dataRow);
                     }
                     mySheet.writeWorkBook();
@@ -427,20 +427,20 @@ public class ExcelController {
                     for (Map<String, Object> data : list) {
 
                         Date t = (Date) data.get("call_date");
-                        Date convertedDate = CommonUtils.dateConverte_EST_To_IST(t);
+                        Date convertedDate = CommonUtils.dateConverte_IST_To_EST(t);
 
                         String call_date = DateUtils.convertDateToString(convertedDate, "yyyy-MM-dd HH:mm");
 
                         POIRow dataRow = new POIRow();
 
-                        dataRow.addCell(call_date, POICell.TYPE_TEXT);
+                        dataRow.addCell(DateUtils.convertDateToString(t, "yyyy-MM-dd HH:mm"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("phone_number"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("length_in_sec"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("status"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("term_reason"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("comments"), POICell.TYPE_TEXT);
-                        dataRow.addCell(DateUtils.convertDateToString(t, "yyyy-MM-dd HH:mm"), POICell.TYPE_TEXT);
+                        dataRow.addCell(call_date, POICell.TYPE_TEXT);
                         mySheet.addRow(dataRow);
                     }
                     mySheet.writeWorkBook();
