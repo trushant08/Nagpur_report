@@ -124,10 +124,12 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
             paramSource.addValue("title", null);
             paramSource.addValue("first_name", lead.getRetailerName().length() > 30 ? lead.getRetailerName().substring(0, 30) : lead.getRetailerName());
             paramSource.addValue("middle_initial", null);
-            paramSource.addValue("last_name", lead.getBeatDiscription());
+//            paramSource.addValue("last_name", lead.getBeatDiscription());
+            paramSource.addValue("last_name", null);
             paramSource.addValue("address1", lead.getDistributorName());
             paramSource.addValue("address2", lead.getDistributorCode());
-            paramSource.addValue("address3", null);
+//            paramSource.addValue("address3", null);
+            paramSource.addValue("address3", lead.getBeatDiscription());
             paramSource.addValue("city", null);
             paramSource.addValue("state", null);
             paramSource.addValue("province", null);
