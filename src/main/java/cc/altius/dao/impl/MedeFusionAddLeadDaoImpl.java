@@ -47,7 +47,7 @@ public class MedeFusionAddLeadDaoImpl implements MedeFusionAddLeadDao {
             codeObj = null;
         }
         if (codeObj != null) {
-            if (ll.getPhone_No().length() != 10) {
+            if (ll.getPhone_No().length() < 10) {
                 maricoLogger.info("Phone no is not 10 digits so trying to get Code");
 
                 maricoLogger.info("Found STD code " + codeObj);
