@@ -8,7 +8,6 @@ import cc.altius.dao.GoAutoDialerDao;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -116,7 +115,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 + " vicidial_campaigns.`campaign_description`, "
                 + " COALESCE(vicidial_closer_log.`term_reason`,'IVR ABANDON') AS term_reason, "
                 + " COALESCE(vicidial_closer_log.`status`,'IVR ABANDON') AS `status`, "
-                + " vicidial_closer_log.`call_date`, "
+                + " COALESCE(vicidial_closer_log.`call_date`,vicidial_did_log.`call_date`) AS call_date, "
                 + " IF ( "
                 + " vicidial_closer_log.`status` = 'NANQUE' , "
                 + " call_log.`length_in_sec`, "
