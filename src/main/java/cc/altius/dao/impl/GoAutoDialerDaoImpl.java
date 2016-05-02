@@ -5,6 +5,7 @@
 package cc.altius.dao.impl;
 
 import cc.altius.dao.GoAutoDialerDao;
+import cc.altius.utils.LogUtils;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -262,6 +263,61 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return report;
+    }
+
+    //Inbound Report With Hold Time New
+    @Override
+    public List<Map<String, Object>> getInboundReportNew(String startDate, String endDate, String[] selectedServiceIds, int id) {
+
+        String sql = "SELECT"
+                + " vicidial_did_log.`uniqueid`,"
+                + " vicidial_did_log.`caller_id_number`,"
+                + " vicidial_inbound_dids.`did_description`,"
+                + " vicidial_campaigns.`campaign_description`,"
+                + " COALESCE(vicidial_closer_log.`term_reason`,'IVR ABANDON') AS term_reason,"
+                + " COALESCE(vicidial_closer_log.`status`,'IVR ABANDON') AS `status`,"
+                + " COALESCE(vicidial_closer_log.`call_date`,vicidial_did_log.`call_date`) AS call_date,"
+                + " COALESCE(IF ( vicidial_closer_log.`status` = 'NANQUE', call_log.`length_in_sec`, vicidial_closer_log.`length_in_sec` ),call_log.`length_in_sec`) AS length_in_sec,"
+                + " vicidial_closer_log.`queue_seconds` AS queue_seconds,"
+                + " IFNULL(park.`parked_sec`,0) AS HoldTime,"
+                + " IFNULL(vicidial_agent_log.`dispo_sec`,0) AS wraptime,"
+                + " vicidial_closer_log.`user`"
+                + " FROM"
+                + " vicidial_did_log"
+                + " LEFT JOIN vicidial_inbound_dids ON vicidial_inbound_dids.`did_id` = vicidial_did_log.`did_id`"
+                + " LEFT JOIN vicidial_closer_log ON vicidial_did_log.`uniqueid` = vicidial_closer_log.`uniqueid`"
+                + " LEFT JOIN vicidial_campaigns ON vicidial_inbound_dids.`campaign_id` = vicidial_campaigns.`campaign_id`"
+                + " LEFT JOIN call_log ON call_log.`uniqueid` = vicidial_did_log.`uniqueid`"
+                + " LEFT JOIN (SELECT park_log.`uniqueid`,SUM(IFNULL(park_log.`parked_sec`,0)) `parked_sec`"
+                + " FROM park_log"
+                + " WHERE park_log.`parked_time` BETWEEN ? AND ?  "
+                + " GROUP BY park_log.`uniqueid`) AS park"
+                + " ON park.`uniqueid`=vicidial_did_log.`uniqueid`"
+                + " LEFT JOIN vicidial_agent_log ON vicidial_agent_log.`uniqueid` = vicidial_did_log.`uniqueid`"
+                + " AND vicidial_agent_log.`status` IS NOT NULL"
+                + " WHERE vicidial_did_log.`call_date` BETWEEN ? AND ? "
+                + " AND vicidial_inbound_dids.`did_id` IN (";
+
+        String strSelectedServiceIds = "";
+        for (String i : selectedServiceIds) {
+            strSelectedServiceIds += i + ",";
+        }
+        if (selectedServiceIds.length > 0) {
+            strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
+        }
+        sql += strSelectedServiceIds + ")";
+
+        List<Map<String, Object>> report = null;
+        try {
+            if (id == 1) {
+                report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate, startDate, endDate);
+            } else {
+                report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate, startDate, endDate);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

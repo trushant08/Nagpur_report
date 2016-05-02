@@ -12,7 +12,6 @@ import cc.altius.utils.POI.POIRow;
 import cc.altius.utils.POI.POIWorkSheet;
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,16 +44,16 @@ public class ExcelController {
             int zoneId = ServletRequestUtils.getIntParameter(request, "zoneId", 0);
             String startDate = ServletRequestUtils.getStringParameter(request, "startDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
             String endDate = ServletRequestUtils.getStringParameter(request, "stopDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMDHM));
-            
+
             //These dates are for Excel File Name.......(Used in Excel File Name)
             String startDateExcel = startDate.substring(0, 10);
             String endDateExcel = endDate.substring(0, 10);
 
-            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);          
+            int reportTypeId = ServletRequestUtils.getIntParameter(request, "reportId", 0);
             String selectedServiceIds[] = ServletRequestUtils.getStringParameters(request, "selectedServiceIds");
-            
+
             int groupId = ServletRequestUtils.getIntParameter(request, "groupId", 0);
-            
+
 //            String startDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(startDate);
 //            String endDateIST_To_EST = CommonUtils.dateConverte_IST_To_EST(endDate);
             String startDatePST_To_EST = CommonUtils.dateConverte_PST_To_EST(startDate);
@@ -63,10 +62,13 @@ public class ExcelController {
             //List<Map<String, Object>> leadData = null;
             List<Map<String, Object>> list = null;
 
-            if (reportTypeId == 1 || reportTypeId == 6) {
+            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12) {
                 if (zoneId == TIME_IST) {
-
-                    list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
+                    if (reportTypeId == 1 || reportTypeId == 6) {
+                        list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
+                    } else {
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                    }
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(IST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -126,8 +128,11 @@ public class ExcelController {
                     out.flush();
 
                 } else if (zoneId == TIME_EST) {
-
-                    list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
+                    if (reportTypeId == 1 || reportTypeId == 6) {
+                        list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
+                    } else {
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                    }
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(EST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");
@@ -183,7 +188,11 @@ public class ExcelController {
                     out.flush();
 
                 } else if (zoneId == TIME_PST) {
-                    list = this.goAutoDialerService.goAutoDialerInboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, serverId);
+                    if (reportTypeId == 1 || reportTypeId == 6) {
+                        list = this.goAutoDialerService.goAutoDialerInboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, serverId);
+                    } else {
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                    }
 
                     OutputStream out = response.getOutputStream();
                     response.setHeader("Content-Disposition", "attachment;filename=InboundReport(PST)-" + startDateExcel + "_to_" + endDateExcel + ".xls");

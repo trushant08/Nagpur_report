@@ -4,9 +4,6 @@
  */
 package cc.altius.service;
 
-import cc.altius.model.Group;
-import cc.altius.model.ReportType;
-import cc.altius.model.Service;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +21,6 @@ public interface GoAutoDialerService {
     public List<Map<String, Object>> goAutoDialerOutboundReport(String startDate, String endDate, String[] selectedServiceIds, int reportTypeId, int id);
 
     public List<Map<String, Object>> getAgentPerformanceReport(String startDate, String endDate, String[] selectedServiceIds, int id);
+
+    public List<Map<String, Object>> getInboundReportNew(String startDate, String endDate, String[] selectedServiceIds, int id);
 }

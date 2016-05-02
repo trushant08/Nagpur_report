@@ -40,4 +40,9 @@ public class GoAutoDialerServiceImpl implements GoAutoDialerService {
     public List<Map<String, Object>> getAgentPerformanceReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
         return this.goAutoDialerDao.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
     }
+
+    @Override
+    public List<Map<String, Object>> getInboundReportNew(String startDate, String endDate, String[] selectedServiceIds, int id) {
+        return this.goAutoDialerDao.getInboundReportNew(startDate, endDate, selectedServiceIds, id);
+    }
 }
