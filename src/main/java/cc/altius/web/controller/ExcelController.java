@@ -67,7 +67,7 @@ public class ExcelController {
                     if (reportTypeId == 1 || reportTypeId == 6) {
                         list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
                     } else {
-                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, serverId);
                     }
 
                     OutputStream out = response.getOutputStream();
@@ -131,7 +131,7 @@ public class ExcelController {
                     if (reportTypeId == 1 || reportTypeId == 6) {
                         list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
                     } else {
-                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, serverId);
                     }
 
                     OutputStream out = response.getOutputStream();
@@ -191,7 +191,7 @@ public class ExcelController {
                     if (reportTypeId == 1 || reportTypeId == 6) {
                         list = this.goAutoDialerService.goAutoDialerInboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, serverId);
                     } else {
-                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, zoneId);
+                        list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, serverId);
                     }
 
                     OutputStream out = response.getOutputStream();
