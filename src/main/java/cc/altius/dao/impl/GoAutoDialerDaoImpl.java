@@ -5,7 +5,6 @@
 package cc.altius.dao.impl;
 
 import cc.altius.dao.GoAutoDialerDao;
-import cc.altius.utils.LogUtils;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -220,11 +219,11 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     public List<Map<String, Object>> getAgentPerformanceReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
 
         String sql = "SELECT vicidial_users.user,full_name,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME( SUM( talk_sec ) ) , '%H:%i:%S') AS CHAR) AS ActiveTime, "
+                + " CAST(TIME_FORMAT(SEC_TO_TIME( SUM( talk_sec ) - SUM((dead_sec)) ) , '%H:%i:%S') AS CHAR) AS ActiveTime,"
                 + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( pause_sec )) , '%H:%i:%S')  AS CHAR) AS NOTREADY ,"
                 + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( wait_sec )) , '%H:%i:%S')  AS CHAR) AS IDLE ,"
                 + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM((dead_sec))+(SUM( dispo_sec )) ) , '%H:%i:%S')  AS CHAR) AS WrapTime,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(  (SUM( talk_sec ) + SUM( pause_sec ) + SUM( wait_sec ) + SUM( dispo_sec ) + SUM(dead_sec))) , '%H:%i:%S')  AS CHAR) AS TOTAL,"
+                + " CAST(TIME_FORMAT(SEC_TO_TIME(  (SUM( talk_sec ) + SUM( pause_sec ) + SUM( wait_sec ) + SUM( dispo_sec ) )) , '%H:%i:%S')  AS CHAR) AS TOTAL,"
                 + " CAST(SUM(IF(vicidial_agent_log.status !='null',1,0))  AS CHAR) AS CALLS,"
                 + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='OCW',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS OCWTIME,"
                 + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='LBREAK' OR vicidial_agent_log.`sub_status`='LB',vicidial_agent_log.`pause_sec`,0))),'%H:%i:%S') AS CHAR) AS LBREAKTIME,"
@@ -237,11 +236,11 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 + " CAST(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS CHAR) AS Pause"
                 + " FROM vicidial_users, vicidial_agent_log"
                 + " WHERE vicidial_agent_log.`event_time` BETWEEN ? AND ?"
-                + " AND vicidial_users.user = vicidial_agent_log.user "
-                + " AND pause_sec <65000 "
-                + " AND wait_sec <65000 "
-                + " AND talk_sec <65000 "
-                + " AND dispo_sec <65000 "
+                + " AND vicidial_users.user = vicidial_agent_log.user"
+                + " AND pause_sec <65000"
+                + " AND wait_sec <65000"
+                + " AND talk_sec <65000"
+                + " AND dispo_sec <65000"
                 + " AND vicidial_agent_log.campaign_id IN (";
 
         String strSelectedServiceIds = "'";
