@@ -38,6 +38,7 @@
                         <th>BRF Break Time</th>
                         <th>Manual Calls</th>
                         <th>Login</th>
+                        <th>NXDIAL</th>
                         <th>Pause</th>
                     </tr>
                 </thead>
@@ -60,6 +61,7 @@
                             <td><c:out value="${listItem.BRFBEAKTIME}"/></td>
                             <td><c:out value="${listItem.manualCalls}"/></td>
                             <td><c:out value="${listItem.login}"/></td>
+                            <td><c:out value="${listItem.nxdial}"/></td>
                             <td><c:out value="${listItem.pause}"/></td>
                         </tr>
                     </c:forEach>

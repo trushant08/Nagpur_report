@@ -568,6 +568,7 @@ public class ExcelController {
                     headerRow.addCell("BRF Break Time");
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
+                    headerRow.addCell("NXDIAL");
                     headerRow.addCell("Pause");
                     mySheet.addRow(headerRow);
 
@@ -591,6 +592,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
@@ -623,6 +625,8 @@ public class ExcelController {
                     headerRow.addCell("BRF Break Time");
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
+                    headerRow.addCell("NXDIAL");
+                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -646,6 +650,8 @@ public class ExcelController {
                         dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }
@@ -677,6 +683,8 @@ public class ExcelController {
                     headerRow.addCell("BRF Break Time");
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
+                    headerRow.addCell("NXDIAL");
+                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -700,6 +708,8 @@ public class ExcelController {
                         dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }
