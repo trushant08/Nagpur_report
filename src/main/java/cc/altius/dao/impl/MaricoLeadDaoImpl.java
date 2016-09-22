@@ -49,7 +49,7 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
     public List<MaricoLeads> getMaricoLeadList(String startDate, String endDate) {
         startDate += " 00:00:00";
         endDate += " 23:59:59";
-        String sql = "SELECT  `MARICO_LEAD_ID`,`UNIQUE_ID`,`RETAILER_NAME`,`BEAT_DISCRIPTION`,`DISTRIBUTOR_NAME`,`DISTRIBUTOR_CODE`,`PHONE_NO`,`DSR_STATUS`,`LIST_ID`,`MODIFIED_DATE`,`INSERTED_IN_DIALER_DATE`,`CREATED_DATE`,`LEAD_STATUS`  FROM `maricodsr`.`marico_lead` WHERE `CREATED_DATE` between ? and ? ;";
+        String sql = "SELECT  `MARICO_LEAD_ID`,`UNIQUE_ID`,`RETAILER_NAME`,`BEAT_DISCRIPTION`,`DISTRIBUTOR_NAME`,`DISTRIBUTOR_CODE`,`PHONE_NO`,`DSR_STATUS`,`LIST_ID`, `MODIFIED_DATE`,DATE_FORMAT(`INSERTED_IN_DIALER_DATE`,'%Y-%m-%d %T') INSERTED_IN_DIALER_DATE,DATE_FORMAT(`CREATED_DATE`,'%Y-%m-%d %T') CREATED_DATE,`LEAD_STATUS`  FROM `maricodsr`.`marico_lead` WHERE `CREATED_DATE` between ? and ? ";
         List<MaricoLeads> maricoLeadList = null;
         maricoLeadList = this.jdbcTemplate.query(sql, ParameterizedBeanPropertyRowMapper.newInstance(MaricoLeads.class), startDate, endDate);
         return maricoLeadList;
@@ -58,7 +58,7 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
     @Override
     public List<Map<String, Object>> getOpenLeadList() {
 
-        String sql = "SELECT marico_lead.`CREATED_DATE`  createdDate,marico_lead.`BEAT_DISCRIPTION`  beatDiscription,marico_lead.`LIST_ID` listId,COUNT(*) COUNT FROM marico_lead WHERE  marico_lead.`LEAD_STATUS`=0  GROUP BY marico_lead.`CREATED_DATE`,  marico_lead.`BEAT_DISCRIPTION`;";
+        String sql = "SELECT marico_lead.`CREATED_DATE`  createdDate,marico_lead.`BEAT_DISCRIPTION`  beatDiscription,marico_lead.`LIST_ID` listId,COUNT(*) COUNT FROM marico_lead WHERE  marico_lead.`LEAD_STATUS`=0  GROUP BY DATE(marico_lead.`CREATED_DATE`),  marico_lead.`BEAT_DISCRIPTION`;";
         List<Map<String, Object>> openLeadList = null;
         openLeadList = this.jdbcTemplate.queryForList(sql);
 
@@ -67,9 +67,11 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
 
     @Override
     public List<MaricoLeads> getOpenLeadListForDial(String createdDate, String beatDesc) {
-        String sql = "SELECT  `MARICO_LEAD_ID`,`UNIQUE_ID`,`RETAILER_NAME`,`BEAT_DISCRIPTION`,`DISTRIBUTOR_NAME`,`DISTRIBUTOR_CODE`,`PHONE_NO`,`DSR_STATUS`,`LIST_ID`,`MODIFIED_DATE`,`INSERTED_IN_DIALER_DATE`,`CREATED_DATE`,`LEAD_STATUS`  FROM `maricodsr`.`marico_lead` WHERE `LEAD_STATUS` =0 and `CREATED_DATE` =? and BEAT_DISCRIPTION= ? ;";
+        String startDate = createdDate + " 00:00:00";
+        String stopDate = createdDate + " 23:59:59";
+        String sql = "SELECT  `MARICO_LEAD_ID`,`UNIQUE_ID`,`RETAILER_NAME`,`BEAT_DISCRIPTION`,`DISTRIBUTOR_NAME`,`DISTRIBUTOR_CODE`,`PHONE_NO`,`DSR_STATUS`,`LIST_ID`,`MODIFIED_DATE`,`INSERTED_IN_DIALER_DATE`,`CREATED_DATE`,`LEAD_STATUS`  FROM `maricodsr`.`marico_lead` WHERE `LEAD_STATUS` =0 and `CREATED_DATE` BETWEEN ? AND ? and BEAT_DISCRIPTION= ? ;";
         List<MaricoLeads> maricoLeadList = null;
-        maricoLeadList = this.jdbcTemplate.query(sql, ParameterizedBeanPropertyRowMapper.newInstance(MaricoLeads.class), createdDate, beatDesc);
+        maricoLeadList = this.jdbcTemplate.query(sql, ParameterizedBeanPropertyRowMapper.newInstance(MaricoLeads.class), startDate, stopDate, beatDesc);
         return maricoLeadList;
     }
 

@@ -7,6 +7,7 @@ package cc.altius.web.controller;
 import cc.altius.model.MaricoLeads;
 import cc.altius.service.MaricoLeadService;
 import cc.altius.utils.DateUtils;
+import cc.altius.utils.LogUtils;
 import cc.altius.utils.POI.POICell;
 import cc.altius.utils.POI.POIRow;
 import cc.altius.utils.POI.POIWorkSheet;
@@ -50,6 +51,69 @@ public class MaricoLeadController {
         return "maricoDialerReport";
     }
 
+    @RequestMapping(value = "maricoLeadReportExcel.htm")
+    public void getAccessLogExcelReport(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        try {
+            String startDate = ServletRequestUtils.getStringParameter(request, "startDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMD));
+            String endDate = ServletRequestUtils.getStringParameter(request, "endDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMD));
+
+            List<MaricoLeads> maricoLeadList = maricoLeadService.getMaricoLeadList(startDate, endDate);
+
+            OutputStream out = response.getOutputStream();
+            response.setHeader("Content-Disposition", "attachment;filename=MaricoLeadReport-" + startDate + "_to_" + endDate + ".xls");
+            response.setContentType("application/vnd.ms-excel");
+            POIWorkSheet mySheet = new POIWorkSheet(out, "Marico Lead report");
+            mySheet.setPrintTitle(false);
+            POIRow headerRow = new POIRow(POIRow.HEADER_ROW);
+            headerRow.addCell("Id");
+            headerRow.addCell("Retailer Name");
+            headerRow.addCell("Beat Description");
+            headerRow.addCell("Distributor Name");
+            headerRow.addCell("Distributor code");
+            headerRow.addCell("DSR Status");
+            headerRow.addCell("Phone No");
+            headerRow.addCell("Created Date");
+            headerRow.addCell("Pushed To Dialer Date");
+            headerRow.addCell("Status");
+
+            mySheet.addRow(headerRow);
+
+            for (MaricoLeads data : maricoLeadList) {
+                String status;
+                String pushedToDialerDate = "";
+                if (data.getLeadStatus().equals("0")) {
+                    status = "New Lead";
+                } else if (data.getLeadStatus().equals("1")) {
+                    status = "Pushed to Dialer";
+                    pushedToDialerDate = data.getInsertedInDialerDate();
+                } else {
+                    status = "Rejected";
+                }
+                POIRow dataRow = new POIRow();
+                dataRow.addCell(data.getMaricoLeadId(), POICell.TYPE_INTEGER);
+                dataRow.addCell(data.getRetailerName(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getBeatDiscription(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getDistributorName(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getDistributorCode(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getDsrStatus(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getPhoneNo(), POICell.TYPE_TEXT);
+                dataRow.addCell(data.getCreatedDate(), POICell.TYPE_TEXT);
+                dataRow.addCell(pushedToDialerDate, POICell.TYPE_TEXT);
+                dataRow.addCell(status, POICell.TYPE_TEXT);
+
+
+                mySheet.addRow(dataRow);
+            }
+            mySheet.writeWorkBook();
+            out.close();
+            out.flush();
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @RequestMapping(value = "openDSRLeadReport.htm")
     String showOpenDSRLeadReport(HttpServletRequest request, ModelMap model) {
 
@@ -68,6 +132,7 @@ public class MaricoLeadController {
             // String createdDate = ServletRequestUtils.getStringParameter(request, "createdDate", DateUtils.getCurrentDateString(DateUtils.IST, DateUtils.YMD));
             createdDateStr = dFormatFinal.format(createdDate);
         } catch (Exception e) {
+            LogUtils.systemLogger.info(e);
             throw new Exception("Invalid Date!!!!", e);
         }
         List<MaricoLeads> openLeadList = this.maricoLeadService.getOpenLeadListForDial(createdDateStr, beatDesc);

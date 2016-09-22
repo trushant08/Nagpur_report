@@ -31,7 +31,7 @@
                 window.close();
                 //        window.opener.location.reload(true);
             }
-        </script></script>
+        </script>
 </head>
 
 <body onunload="opener.location.reload(true);">

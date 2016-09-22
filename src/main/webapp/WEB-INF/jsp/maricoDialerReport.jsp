@@ -52,6 +52,11 @@
                         ${param.msg}<br/><br/>
                     </div>
                 </c:if>
+
+                <c:out value="${fn:length(maricoLeadList)}"/> rows found.
+                <span style="padding-left: 750px;">  <a href="#" onclick="$('#excelForm').submit();">
+                        <img src="images/Excel.png" alt="Download excel file" border="0" /></a><br/></span>
+
                 <table class="data_table" width="850px">
                     <thead>
                         <tr class="header">
@@ -62,6 +67,8 @@
                             <td>Distributor code</td>
                             <td>DSR Status</td>  
                             <td>Phone No</td> 
+                            <td>Created Date</td> 
+                            <td>Pushed To Dialer Date</td> 
                             <td>Status</td>
 
                         </tr>
@@ -76,6 +83,18 @@
                                 <td><c:out value="${maricoLeadItem.distributorCode}"/></td>
                                 <td><c:out value="${maricoLeadItem.dsrStatus}"/></td>
                                 <td><c:out value="${maricoLeadItem.phoneNo}"/></td>
+                                <td><c:out value="${maricoLeadItem.createdDate}"/></td>
+                                <td>  <c:choose>
+                                        <c:when test="${maricoLeadItem.leadStatus == 0}">
+                                            <c:out value=""/> 
+                                        </c:when>
+                                        <c:when test="${maricoLeadItem.leadStatus == 1}">
+                                            <c:out value="${maricoLeadItem.insertedInDialerDate}"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value=""/>
+                                        </c:otherwise>
+                                    </c:choose></td>
                                 <td>  <c:choose>
                                         <c:when test="${maricoLeadItem.leadStatus == 0}">
                                             New Lead
@@ -90,6 +109,11 @@
                         </c:forEach>
                     </tbody>
                 </table>
+            </form>
+
+            <form name="excelForm" id="excelForm" method="get" action="maricoLeadReportExcel.htm">
+                <input type="hidden" name="startDate" value="${startDate}"/>
+                <input type="hidden" name="endDate" value="${endDate}"/>
             </form>
         </div>
     </body>
