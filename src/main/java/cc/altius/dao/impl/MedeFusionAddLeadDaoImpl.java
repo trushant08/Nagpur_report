@@ -6,8 +6,11 @@ package cc.altius.dao.impl;
 
 import cc.altius.dao.MedeFusionAddLeadDao;
 import cc.altius.model.LivonLead;
+import cc.altius.model.MaricoLeadUpload;
+import cc.altius.model.mapper.LivonLeadRowMapper;
 import cc.altius.utils.DateUtils;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.apache.log4j.Logger;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -32,6 +36,78 @@ public class MedeFusionAddLeadDaoImpl implements MedeFusionAddLeadDao {
     public void setMaricoDataSource(DataSource maricoDataSource) {
         this.maricoDataSource = maricoDataSource;
         this.maricoJdbcTemplate = new JdbcTemplate(maricoDataSource);
+    }
+
+    @Override
+    @Transactional
+    public List<MaricoLeadUpload> loadDataLocally(String path) {
+        String sql = "TRUNCATE TABLE `maricodsr`.`temp_table`; ";
+        this.maricoJdbcTemplate.update(sql);
+
+        sql = "LOAD DATA LOCAL INFILE '" + path + "' INTO TABLE `maricodsr`.`temp_table` CHARACTER SET 'latin1' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES (`RETAILER_NAME`,`PHONE_NO`, `UNIQUE_ID`,`BEAT_DESC`, `DISTRIBUTOR_NAME`, `DISTRIBUTOR_CODE`, `LIST_ID`, `DSR_STATUS`)";
+        this.maricoJdbcTemplate.execute(sql);
+
+        //make default status true
+        sql = "UPDATE temp_table tt SET tt.`STATUS`=1";
+        this.maricoJdbcTemplate.update(sql);
+
+        //check list_id value
+        sql = "UPDATE temp_table tt SET tt.`STATUS`=0,tt.`REASON`=CONCAT(tt.`REASON`,'list_id is invalid.') WHERE tt.`LIST_ID` IS NULL OR tt.`LIST_ID`!='656'";
+        this.maricoJdbcTemplate.update(sql);
+        
+        //check list_id value
+        sql = "UPDATE temp_table tt SET tt.`STATUS`=0 AND tt.`REASON`=CONCAT(tt.`REASON`,'Unique Id is blank.') WHERE tt.`UNIQUE_ID` IS NULL OR tt.`UNIQUE_ID`=''";
+        this.maricoJdbcTemplate.update(sql);
+
+        //check MPN name required
+        sql = "UPDATE temp_table tt SET tt.`RETAILER_NAME`='' WHERE tt.`RETAILER_NAME` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+        
+        //check MPN name required
+        sql = "UPDATE temp_table tt SET tt.`PHONE_NO`='' WHERE tt.`PHONE_NO` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        //check price name required
+        sql = "UPDATE temp_table tt SET tt.`DISTRIBUTOR_CODE`='' WHERE tt.`DISTRIBUTOR_CODE` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        //check quantity name required
+        sql = "UPDATE temp_table tt SET tt.`BEAT_DESC`='' WHERE tt.`BEAT_DESC` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        //update status if product is new product
+        sql = "UPDATE temp_table tt SET tt.`DISTRIBUTOR_NAME`='' WHERE tt.`DISTRIBUTOR_NAME` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        sql = "UPDATE temp_table tt SET tt.`DSR_STATUS`='' WHERE tt.`DSR_STATUS` IS NULL AND tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        sql = "UPDATE temp_table tt "
+                + " LEFT JOIN dsr_table dt ON dt.`DSR_CODE`=tt.`DISTRIBUTOR_CODE` "
+                + " SET tt.`LIST_ID`=COALESCE(dt.`LIST_ID`,'656') WHERE tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        sql = "UPDATE temp_table tt "
+                + " LEFT JOIN dsr_table dt ON dt.`DSR_CODE`=tt.`DISTRIBUTOR_CODE` "
+                + " SET tt.`PHONE_NO`=IF(LENGTH(tt.`PHONE_NO`)<10,CONCAT(dt.`STD_CODE`,tt.`PHONE_NO`),tt.`PHONE_NO`)"
+                + " WHERE tt.`STATUS`=0";
+        this.maricoJdbcTemplate.update(sql);
+
+        sql = "SELECT * FROM temp_table";
+        return this.maricoJdbcTemplate.query(sql, new LivonLeadRowMapper());
+    }
+
+    @Override
+    public int addMaricoLeadsByCsv() {
+        try {
+            String sql = "INSERT INTO marico_lead SELECT NULL,`UNIQUE_ID`,RETAILER_NAME,BEAT_DESC,DISTRIBUTOR_NAME,DISTRIBUTOR_CODE,PHONE_NO,DSR_STATUS,"
+                    + " LIST_ID,NOW(),NOW(),NULL,0 FROM temp_table tt WHERE tt.`STATUS`=1";
+            maricoLogger.info("Inserted into marico_lead by csv");
+            return this.maricoJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            maricoLogger.info("Exception while inserting into marico_lead :" + e);
+            return -1;
+        }
     }
 
     @Override

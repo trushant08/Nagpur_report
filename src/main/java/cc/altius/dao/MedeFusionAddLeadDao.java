@@ -5,6 +5,8 @@
 package cc.altius.dao;
 
 import cc.altius.model.LivonLead;
+import cc.altius.model.MaricoLeadUpload;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,8 @@ import cc.altius.model.LivonLead;
 public interface MedeFusionAddLeadDao {
 
     public int addLivonLead(LivonLead ll);
+
+    public List<MaricoLeadUpload> loadDataLocally(String path);
+
+    public int addMaricoLeadsByCsv();
 }

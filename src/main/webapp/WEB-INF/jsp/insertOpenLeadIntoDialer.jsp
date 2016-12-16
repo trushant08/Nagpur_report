@@ -37,7 +37,7 @@
 <body onunload="opener.location.reload(true);">
     <div class="in_02">
         <form id="form2"  name="form2" method="post" action="insertOpenLeadIntoDialer.htm" cssClass="userInputForm">
-            <fieldset style="width:400px">
+            <fieldset>
                 <legend>Marico DSR Leads</legend>
 
                 <input type="hidden" value="${id}" name="id">

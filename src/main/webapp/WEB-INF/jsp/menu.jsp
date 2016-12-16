@@ -52,7 +52,7 @@
                 </li>
             </sec:authorize>
 
-            <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_SHOW_REPORT">
+            <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_SHOW_REPORT,ROLE_BF_UPLOAD_MARICO_LEAD">
                 <li class='current'>
                     <a href='#'>Report</a>
                     <ul> 
@@ -68,10 +68,13 @@
                         <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_OPEN_DSR_LEAD_REPORT">
                             <li> <a href='openDSRLeadReport.htm'>Open DSR Leads</a></li>
                         </sec:authorize>
+                        <sec:authorize ifAnyGranted="ROLE_BF_UPLOAD_MARICO_LEAD">
+                            <li> <a href='uploadMaricoLeads.htm'>Upload Marico DSR Leads</a></li>
+                        </sec:authorize>
                     </ul>
                 </li>
             </sec:authorize>
         </ul>
     </div>
-    <div style="padding-top: 10px"><%@include file="common/message.jsp" %></div>
+    <div style="padding-top: 10px;padding-left: 20px"><%@include file="common/message.jsp" %></div>
 </div>
