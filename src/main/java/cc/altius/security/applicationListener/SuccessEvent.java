@@ -26,7 +26,6 @@ public class SuccessEvent implements ApplicationListener<AuthenticationSuccessEv
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent e) {
-        System.out.println("Inside the success event");
         CustomUserDetails curUser = (CustomUserDetails) e.getAuthentication().getPrincipal();
         this.userService.loginSuccessUpdateForUserId(curUser.getUserId());
         this.logService.accessLog(((WebAuthenticationDetails) e.getAuthentication().getDetails()).getRemoteAddress(), curUser.getUsername(), curUser.getUserId(), true, "Success");

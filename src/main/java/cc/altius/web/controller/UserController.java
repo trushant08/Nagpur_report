@@ -149,7 +149,6 @@ public class UserController {
                 this.userService.updateUser(user);
                 return "redirect:userList.htm?msg=msg.userUpdatedSuccessfully";
             } catch (Exception e) {
-                e.printStackTrace();
                 LogUtils.systemLogger.info(e);
                 errors.reject("username", "msg.userError");
                 model.addAttribute("roleList", this.userService.getRoleList());
@@ -157,7 +156,7 @@ public class UserController {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
             return " ";
         }
     }

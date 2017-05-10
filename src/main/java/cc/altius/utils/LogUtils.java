@@ -12,7 +12,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -121,7 +120,6 @@ public class LogUtils {
 
     public static String buildStringForSystemLog(String msg) {
         StringBuilder sb = new StringBuilder(getIpAddress()).append(" -- ").append(getUsername()).append("(").append(getUserId()).append(") -- ").append(msg);
-        System.out.println(sb);
         return sb.toString();
     }
 

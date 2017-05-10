@@ -22,7 +22,6 @@ public class AccessDeniedController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showPage() {
-        System.out.println("Inside access denied controller");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             if (auth.isAuthenticated()) {

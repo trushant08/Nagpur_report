@@ -108,9 +108,9 @@ public class MaricoLeadController {
             out.close();
             out.flush();
         } catch (IOException io) {
-            io.printStackTrace();
+            LogUtils.systemLogger.warn(LogUtils.buildStringForSystemLog(io));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 
@@ -195,9 +195,9 @@ public class MaricoLeadController {
                 out.flush();
 
             } catch (IOException i) {
-                i.printStackTrace();
+                LogUtils.systemLogger.warn(LogUtils.buildStringForSystemLog(i));
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
             }
 
         } else if (submit.equalsIgnoreCase("Dialed for Nagpur")) {
@@ -219,8 +219,6 @@ public class MaricoLeadController {
         int date = ServletRequestUtils.getIntParameter(request, "id");
         String beatDesc = ServletRequestUtils.getStringParameter(request, "desc");
         Date curDate = DateUtils.getCurrentDateObject(DateUtils.IST);
-        System.out.println("in leadsforNagpurExcel" + check[0]);
-        System.out.println("check value = " + check.length);
         List<MaricoLeads> leadList = new ArrayList<MaricoLeads>();
         for (Integer leadId : check) {
             MaricoLeads lead = this.maricoLeadService.getMaricoLeadByLeadId(leadId);
@@ -309,9 +307,9 @@ public class MaricoLeadController {
             out.close();
             out.flush();
         } catch (IOException i) {
-            i.printStackTrace();
+            LogUtils.systemLogger.warn(LogUtils.buildStringForSystemLog(i));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 }

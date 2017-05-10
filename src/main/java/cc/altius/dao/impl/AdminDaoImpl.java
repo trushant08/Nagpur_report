@@ -15,6 +15,7 @@ import cc.altius.model.mapper.ReportTypeMapper;
 import cc.altius.model.mapper.ServerTypeMapper;
 import cc.altius.model.mapper.ServiceMapper;
 import cc.altius.utils.DateUtils;
+import cc.altius.utils.LogUtils;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +79,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             this.jdbcTemplate.update(sql, reportType.getReportTypeDesc(), reportType.isActive(), reportType.getServerType().getServerTypeId(), reportType.getReportTypeId());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 
@@ -116,7 +117,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             this.jdbcTemplate.update(sql, group.getGroupDesc(), group.isActive(), group.getServerType().getServerTypeId(), group.getGroupId());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 
@@ -155,7 +156,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             this.jdbcTemplate.update(sql, service.getServiceName(), service.isActive(), service.getServerServiceId(), service.getServerType().getServerTypeId(), service.getServiceId());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 

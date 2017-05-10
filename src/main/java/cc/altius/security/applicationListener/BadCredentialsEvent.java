@@ -25,7 +25,6 @@ public class BadCredentialsEvent implements ApplicationListener<AuthenticationFa
 
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent e) {
-        System.out.println("inside Failure");
         String curUser = (String) e.getAuthentication().getPrincipal();
         this.userService.incrementFailedCountForUsername(curUser);
         this.logService.accessLog(((WebAuthenticationDetails) e.getAuthentication().getDetails()).getRemoteAddress(), curUser, null, false, "Incorrect Password");

@@ -7,6 +7,7 @@ package cc.altius.dao.impl;
 import cc.altius.dao.MaricoLeadDao;
 import cc.altius.model.MaricoLeads;
 import cc.altius.utils.DateUtils;
+import cc.altius.utils.LogUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -105,12 +106,12 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
             Integer listId = null;
             try {
                 listId = this.jdbcTemplate.queryForObject(selectSql, Integer.class, Integer.parseInt(lead.getDistributorCode()));//selectSql, new Object[]{Integer.parseInt(ll.getDistributor_code())}, String.class);
-                System.out.println("" + selectSql + lead.getDistributorCode());
+                LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("" + selectSql + lead.getDistributorCode()));
             } catch (Exception e) {
                 listId = 105;
-                e.printStackTrace();
+                LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
             }
-            System.out.println("i----" + i);
+            LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("i----" + i));
             paramSource.addValue("lead_id", null);
             paramSource.addValue("entry_date", curDate);
             paramSource.addValue("modify_date", curDate);
@@ -166,10 +167,10 @@ public class MaricoLeadDaoImpl implements MaricoLeadDao {
         Integer listId = 105;
         try {
             listId = this.jdbcTemplate.queryForObject(selectSql, Integer.class, Integer.parseInt(leads.getDistributorCode()));//selectSql, new Object[]{Integer.parseInt(ll.getDistributor_code())}, String.class);
-            System.out.println("" + selectSql + leads.getDistributorCode());
+            LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("" + selectSql + leads.getDistributorCode()));
         } catch (Exception e) {
             listId = 105;
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         leads.setListId(Integer.toString(listId));
         return leads;

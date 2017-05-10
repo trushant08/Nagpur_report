@@ -32,20 +32,20 @@ public class PasswordEncoderTest {
 //
 //        System.out.println("sb :" + sb.toString());
 
-        String test = "BC-NH6jkh";
-        String s = test.substring(test.indexOf("-") + 1);
-        String ticketNo;
-        String t;
-        if (s.length() >= 6) {
-            s = test.substring(test.indexOf("-") + 1, test.indexOf("-") + 7);
-            t = test.substring(0, test.indexOf("-"));
-            System.out.println("t :" + t + " s :" + s);
-            if (t.length() == 2) {
-                ticketNo = t + "-" + s;
-                System.out.println("ticketNo" + ticketNo);
-            }
-        }
-
-        System.out.println("s:" + s);
+//        String test = "BC-NH6jkh";
+//        String s = test.substring(test.indexOf("-") + 1);
+//        String ticketNo;
+//        String t;
+//        if (s.length() >= 6) {
+//            s = test.substring(test.indexOf("-") + 1, test.indexOf("-") + 7);
+//            t = test.substring(0, test.indexOf("-"));
+//            System.out.println("t :" + t + " s :" + s);
+//            if (t.length() == 2) {
+//                ticketNo = t + "-" + s;
+//                System.out.println("ticketNo" + ticketNo);
+//            }
+//        }
+//
+//        System.out.println("s:" + s);
     }
 }

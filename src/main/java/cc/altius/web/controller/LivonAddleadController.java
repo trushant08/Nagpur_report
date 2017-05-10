@@ -50,7 +50,7 @@ public class LivonAddleadController {
                 try {
                     dt = sdf.parse(text);
                 } catch (ParseException pe) {
-                    pe.printStackTrace();
+                    LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(pe));
                 }
                 super.setValue(dt);
             }

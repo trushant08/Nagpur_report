@@ -12,6 +12,7 @@ import cc.altius.model.Service;
 import cc.altius.service.AdminService;
 import cc.altius.service.GoAutoDialerService;
 import cc.altius.utils.DateUtils;
+import cc.altius.utils.LogUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -136,6 +137,7 @@ public class GoAutoDialerController {
                 Date convertedDate = CommonUtils.dateConverte_IST_To_EST(t);
                 m.put("convertedCallStartDt", convertedDate);
             }
+            LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("List length :" +list.size()));
             modelMap.addAttribute("list", list);
 
             if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12) {

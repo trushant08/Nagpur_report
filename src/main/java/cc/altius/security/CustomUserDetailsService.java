@@ -63,7 +63,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                     user.setBusinessFunction(businessFunctions);
                 } else {
                     user.setBusinessFunction(this.userDao.getBusinessFunctionsForUserId(user.getUserId()));
-                    System.out.println(user);
+                    LogUtils.systemLogger.debug("User" + user);
                 }
             }
             return user;

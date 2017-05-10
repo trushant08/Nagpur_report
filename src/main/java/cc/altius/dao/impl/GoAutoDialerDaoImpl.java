@@ -5,6 +5,7 @@
 package cc.altius.dao.impl;
 
 import cc.altius.dao.GoAutoDialerDao;
+import cc.altius.utils.LogUtils;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -89,9 +90,8 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
         }
         sql += strSelectedServiceIds + ")";
-        System.out.println("sql = " + sql);
-        System.out.println("startDate = " + startDate);
-        System.out.println("stopDate = " + endDate);
+        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog(sql, new Object[]{startDate, endDate}));
+
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -100,7 +100,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         return report;
     }
@@ -147,9 +147,8 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 1);
         }
         sql += strSelectedServiceIds + ")";
-        System.out.println("sql = " + sql);
-        System.out.println("startDate = " + startDate);
-        System.out.println("stopDate = " + endDate);
+        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog(sql, new Object[]{startDate, endDate}));
+
         List<Map<String, Object>> report = null;
 
         try {
@@ -159,7 +158,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         return report;
     }
@@ -198,9 +197,8 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
         sql += strSelectedServiceIds + ")";
-        System.out.println("sql = " + sql);
-        System.out.println("startDate = " + startDate);
-        System.out.println("stopDate = " + endDate);
+        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog(sql, new Object[]{startDate, endDate}));
+
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -210,7 +208,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         return report;
     }
@@ -218,31 +216,67 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     @Override
     public List<Map<String, Object>> getAgentPerformanceReport(String startDate, String endDate, String[] selectedServiceIds, int id) {
 
-        String sql = "SELECT vicidial_users.user,full_name,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME( SUM( talk_sec ) - SUM((dead_sec)) ) , '%H:%i:%S') AS CHAR) AS ActiveTime,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( pause_sec )) , '%H:%i:%S')  AS CHAR) AS NOTREADY ,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( wait_sec )) , '%H:%i:%S')  AS CHAR) AS IDLE ,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM((dead_sec))+(SUM( dispo_sec )) ) , '%H:%i:%S')  AS CHAR) AS WrapTime,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(  (SUM( talk_sec ) + SUM( pause_sec ) + SUM( wait_sec ) + SUM( dispo_sec ) )) , '%H:%i:%S')  AS CHAR) AS TOTAL,"
-                + " CAST(SUM(IF(vicidial_agent_log.status !='null',1,0))  AS CHAR) AS CALLS,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='OCW',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS OCWTIME,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='LBREAK' OR vicidial_agent_log.`sub_status`='LB',vicidial_agent_log.`pause_sec`,0))),'%H:%i:%S') AS CHAR) AS LBREAKTIME,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='TBREAK' OR vicidial_agent_log.`sub_status`='TB',vicidial_agent_log.`pause_sec`,0))),'%H:%i:%S') AS CHAR) AS TBREAKTIME,"
-                + " CAST(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='QFB' OR vicidial_agent_log.`sub_status`='QFback',vicidial_agent_log.`pause_sec`,0))) AS CHAR) AS QUALITYFEEDBACK,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='TDT' OR vicidial_agent_log.`sub_status`='TDTime' OR vicidial_agent_log.`sub_status`='TDown',vicidial_agent_log.`pause_sec`,0)))  , '%H:%i:%S') AS CHAR) AS TDTBEAKTIME,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='BRF',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS BRFBEAKTIME,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='MCALLS' OR vicidial_agent_log.`sub_status`='Mcall',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS MANUALCALLS ,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='LOGIN',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS LOGIN ,"
-                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='NXDIAL',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS NXDIAL ,"
-                + " CAST(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS CHAR) AS Pause"
-                + " FROM vicidial_users, vicidial_agent_log"
-                + " WHERE vicidial_agent_log.`event_time` BETWEEN  ? AND ?"
-                + " AND vicidial_users.user = vicidial_agent_log.user"
-                + " AND pause_sec <65000"
-                + " AND wait_sec <65000"
-                + " AND talk_sec <65000"
-                + " AND dispo_sec <65000"
-                + " AND vicidial_agent_log.campaign_id IN (";
+//        String sql = "SELECT vicidial_users.user,full_name,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME( SUM( talk_sec ) - SUM((dead_sec)) ) , '%H:%i:%S') AS CHAR) AS ActiveTime,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( pause_sec )) , '%H:%i:%S')  AS CHAR) AS NOTREADY ,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM( wait_sec )) , '%H:%i:%S')  AS CHAR) AS IDLE ,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM((dead_sec))+(SUM( dispo_sec )) ) , '%H:%i:%S')  AS CHAR) AS WrapTime,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(  (SUM( talk_sec ) + SUM( pause_sec ) + SUM( wait_sec ) + SUM( dispo_sec ) )) , '%H:%i:%S')  AS CHAR) AS TOTAL,"
+//                + " CAST(SUM(IF(vicidial_agent_log.status !='null',1,0))  AS CHAR) AS CALLS,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='OCW',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS OCWTIME,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='LBREAK' OR vicidial_agent_log.`sub_status`='LB',vicidial_agent_log.`pause_sec`,0))),'%H:%i:%S') AS CHAR) AS LBREAKTIME,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='TBREAK' OR vicidial_agent_log.`sub_status`='TB',vicidial_agent_log.`pause_sec`,0))),'%H:%i:%S') AS CHAR) AS TBREAKTIME,"
+//                + " CAST(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='QFB' OR vicidial_agent_log.`sub_status`='QFback',vicidial_agent_log.`pause_sec`,0))) AS CHAR) AS QUALITYFEEDBACK,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='TDT' OR vicidial_agent_log.`sub_status`='TDTime' OR vicidial_agent_log.`sub_status`='TDown',vicidial_agent_log.`pause_sec`,0)))  , '%H:%i:%S') AS CHAR) AS TDTBEAKTIME,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='BRF',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS BRFBEAKTIME,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='MCALLS' OR vicidial_agent_log.`sub_status`='Mcall',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS MANUALCALLS ,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='LOGIN',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS LOGIN ,"
+//                + " CAST(TIME_FORMAT(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status`='NXDIAL',vicidial_agent_log.`pause_sec`,0))) , '%H:%i:%S') AS CHAR) AS NXDIAL ,"
+//                + " CAST(SEC_TO_TIME(SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS CHAR) AS Pause"
+//                + " FROM vicidial_users, vicidial_agent_log"
+//                + " WHERE vicidial_agent_log.`event_time` BETWEEN  ? AND ?"
+//                + " AND vicidial_users.user = vicidial_agent_log.user"
+//                + " AND pause_sec <65000"
+//                + " AND wait_sec <65000"
+//                + " AND talk_sec <65000"
+//                + " AND dispo_sec <65000"
+//                + " AND vicidial_agent_log.campaign_id IN (";
+        String sql = "SELECT `User`, FullName,SEC_TO_TIME(ActiveTime) AS ActiveTime,SEC_TO_TIME( IF(Minus>Total, NotReady,\n"
+                + "IF ((NotReady-(Total-Minus)<=0),NotReady,(NotReady-(Total-Minus)) ))) AS NotReady,SEC_TO_TIME(Idle) AS Idle,\n"
+                + "SEC_TO_TIME(Wraptime) AS wraptime,SEC_TO_TIME(IF(Minus>Total, Total, Minus)) Total,\n"
+                + "Calls,SEC_TO_TIME(LbBreakTime) AS LbBreakTime,SEC_TO_TIME(TbBreakTime) AS TbBreakTime,SEC_TO_TIME(QfbBreakTime) AS QfbBreakTime,\n"
+                + "SEC_TO_TIME(TdtBreakTime) AS TdtBreakTime,SEC_TO_TIME(BrfBreakTime) AS BrfBreakTime,\n"
+                + "SEC_TO_TIME(ManualCalls) AS ManualCalls,SEC_TO_TIME(Login) AS Login,\n"
+                //                + "-- sec_to_time(NxDial-(Total-Minus)) As NxDial,\n"
+                + "SEC_TO_TIME(IF((NxDial-(Total-Minus))>=0, (NxDial-(Total-Minus)),0 )) AS NxDial   FROM (\n"
+                + "SELECT vicidial_users.user `User`,full_name `FullName`,\n"
+                + "(SUM( talk_sec ) - SUM(dead_sec) + SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS ActiveTime,\n"
+                + "(SUM( pause_sec ) -SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS NotReady ,\n"
+                + "(SUM( wait_sec )) AS Idle ,\n"
+                + "(SUM((dead_sec))+(SUM( dispo_sec ))) AS WrapTime,\n"
+                + "SUM(IF(vicidial_agent_log.status !='null',1,0)) AS Calls,\n"
+                //                + "-- (SUM(IF(vicidial_agent_log.`sub_status`='OCW',vicidial_agent_log.`pause_sec`,0))) AS OcwTime,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='LBREAK' OR vicidial_agent_log.`sub_status`='LB',vicidial_agent_log.`pause_sec`,0))) AS LbBreakTime,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='TBREAK' OR vicidial_agent_log.`sub_status`='TB',vicidial_agent_log.`pause_sec`,0))) AS TbBreakTime,\n"
+                + "SUM(IF(vicidial_agent_log.`sub_status`='QFB' OR vicidial_agent_log.`sub_status`='QFback',vicidial_agent_log.`pause_sec`,0)) AS QfbBreakTime,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='TDT' OR vicidial_agent_log.`sub_status`='TDTime' OR vicidial_agent_log.`sub_status`='TDown',vicidial_agent_log.`pause_sec`,0))) AS TdtBreakTime,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='BRF',vicidial_agent_log.`pause_sec`,0))) AS BrfBreakTime,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='MCALLS' OR vicidial_agent_log.`sub_status`='Mcall',vicidial_agent_log.`pause_sec`,0))) AS ManualCalls ,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='LOGIN',vicidial_agent_log.`pause_sec`,0))) AS Login ,\n"
+                + "(SUM(IF(vicidial_agent_log.`sub_status`='NXDIAL',vicidial_agent_log.`pause_sec`,0))) AS NxDial ,\n"
+                //                + "-- (SUM(IF(vicidial_agent_log.`sub_status` IS NULL,vicidial_agent_log.`pause_sec`,0))) AS Pause,\n"
+                + "MIN(vicidial_agent_log.`event_time`) AS LoginTime,\n"
+                + "MAX(vicidial_agent_log.`event_time`) AS LogoutTime,\n"
+                + "SUM( talk_sec ) + SUM( pause_sec ) + SUM( wait_sec ) + SUM( dispo_sec ) AS Total,\n"
+                + "TIME_TO_SEC(TIMEDIFF(MAX(vicidial_agent_log.`event_time`),MIN(vicidial_agent_log.`event_time`))) AS Minus\n"
+                + "FROM vicidial_users, vicidial_agent_log\n"
+                + "WHERE vicidial_agent_log.`event_time` BETWEEN ? AND ?\n"
+                + "AND vicidial_users.user = vicidial_agent_log.user\n"
+                + "AND pause_sec <65000\n"
+                + "AND wait_sec <65000\n"
+                + "AND talk_sec <65000\n"
+                + "AND dispo_sec <65000\n"
+                + "AND vicidial_agent_log.`campaign_id` IN (";
 
         String strSelectedServiceIds = "'";
         for (String i : selectedServiceIds) {
@@ -251,10 +285,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
         if (selectedServiceIds.length > 0) {
             strSelectedServiceIds = strSelectedServiceIds.substring(0, strSelectedServiceIds.length() - 2);
         }
-        sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
-        System.out.println("sql = " + sql);
-        System.out.println("startDate = " + startDate);
-        System.out.println("stopDate = " + endDate);
+//        sql += strSelectedServiceIds + ") GROUP BY USER, full_name";
+        sql += strSelectedServiceIds + ") GROUP BY USER, full_name) AS a1";
+        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog(sql, new Object[]{startDate, endDate}));
+
         List<Map<String, Object>> report = null;
         try {
             if (id == 1) {
@@ -264,7 +298,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         return report;
     }
@@ -319,7 +353,7 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate, startDate, endDate);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
         return report;
     }

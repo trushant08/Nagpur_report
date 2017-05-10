@@ -7,6 +7,7 @@ package cc.altius.web.controller;
 import cc.altius.common.utils.CommonUtils;
 import cc.altius.service.GoAutoDialerService;
 import cc.altius.utils.DateUtils;
+import cc.altius.utils.LogUtils;
 import cc.altius.utils.POI.POICell;
 import cc.altius.utils.POI.POIRow;
 import cc.altius.utils.POI.POIWorkSheet;
@@ -560,7 +561,6 @@ public class ExcelController {
                     headerRow.addCell("Wrap Time");
                     headerRow.addCell("Total");
                     headerRow.addCell("Calls");
-                    headerRow.addCell("OCW Time");
                     headerRow.addCell("L Break Time");
                     headerRow.addCell("T Break Time");
                     headerRow.addCell("Quality Feed Back");
@@ -569,7 +569,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-                    headerRow.addCell("Pause");
+//                    headerRow.addCell("Pause");
                     mySheet.addRow(headerRow);
 
                     for (Map<String, Object> data : list) {
@@ -577,23 +577,22 @@ public class ExcelController {
                         POIRow dataRow = new POIRow();
 
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("full_name"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("FullName"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("ActiveTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NOTREADY"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("IDLE"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("WrapTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TOTAL"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("CALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("OCWTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("QUALITYFEEDBACK"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TDTBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NotReady"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Idle"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("wrapTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Total"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Calls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("LbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("QfbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TdtBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("BrfBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("ManualCalls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Login"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NxDial"), POICell.TYPE_TEXT);
+//                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }
@@ -617,7 +616,6 @@ public class ExcelController {
                     headerRow.addCell("Wrap Time");
                     headerRow.addCell("Total");
                     headerRow.addCell("Calls");
-                    headerRow.addCell("OCW Time");
                     headerRow.addCell("L Break Time");
                     headerRow.addCell("T Break Time");
                     headerRow.addCell("Quality Feed Back");
@@ -626,7 +624,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-                    headerRow.addCell("Pause");
+//                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -635,22 +633,21 @@ public class ExcelController {
                         POIRow dataRow = new POIRow();
 
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("full_name"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("FullName"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("ActiveTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NOTREADY"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("IDLE"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("WrapTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TOTAL"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("CALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("OCWTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("QUALITYFEEDBACK"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TDTBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NotReady"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Idle"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("wrapTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Total"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Calls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("LbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("QfbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TdtBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("BrfBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("ManualCalls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Login"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NxDial"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
@@ -675,7 +672,6 @@ public class ExcelController {
                     headerRow.addCell("Wrap Time");
                     headerRow.addCell("Total");
                     headerRow.addCell("Calls");
-                    headerRow.addCell("OCW Time");
                     headerRow.addCell("L Break Time");
                     headerRow.addCell("T Break Time");
                     headerRow.addCell("Quality Feed Back");
@@ -684,7 +680,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-                    headerRow.addCell("Pause");
+//                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -693,23 +689,22 @@ public class ExcelController {
                         POIRow dataRow = new POIRow();
 
                         dataRow.addCell(data.get("user"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("full_name"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("FullName"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("ActiveTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NOTREADY"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("IDLE"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("WrapTime"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TOTAL"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("CALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("OCWTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TBREAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("QUALITYFEEDBACK"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("TDTBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("BRFBEAKTIME"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("MANUALCALLS"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("LOGIN"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("NXDIAL"), POICell.TYPE_TEXT);
-                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NotReady"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Idle"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("wrapTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Total"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Calls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("LbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("QfbBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("TdtBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("BrfBreakTime"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("ManualCalls"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Login"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("NxDial"), POICell.TYPE_TEXT);
+//                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }
@@ -721,9 +716,9 @@ public class ExcelController {
                 //modelMap.addAttribute("list", list);
             }
         } catch (IOException io) {
-            io.printStackTrace();
+            LogUtils.systemLogger.warn(LogUtils.buildStringForSystemLog(io));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
         }
     }
 }

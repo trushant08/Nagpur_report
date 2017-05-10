@@ -39,30 +39,29 @@
                         <th>Manual Calls</th>
                         <th>Login</th>
                         <th>NXDIAL</th>
-                        <th>Pause</th>
+                        <!--<th>Pause</th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${list}" var="listItem">
                         <tr class="">
-
                             <td><c:out value="${listItem.user}"/></td>
-                            <td><c:out value="${listItem.full_name}"/></td>
+                            <td><c:out value="${listItem.FullName}"/></td>
                             <td><c:out value="${listItem.ActiveTime}"/></td>
-                            <td><c:out value="${listItem.notReady}"/></td>
-                            <td><c:out value="${listItem.idle}"/></td>
-                            <td><c:out value="${listItem.wrapTime   }"/></td>
-                            <td><c:out value="${listItem.total}"/></td>
-                            <td><c:out value="${listItem.calls}"/></td>
-                            <td><c:out value="${listItem.lBreakTime}"/></td>
-                            <td><c:out value="${listItem.TBreakTime}"/></td>
-                            <td><c:out value="${listItem.qualityFeedback}"/></td>
-                            <td><c:out value="${listItem.TDTBEAKTIME}"/></td>
-                            <td><c:out value="${listItem.BRFBEAKTIME}"/></td>
-                            <td><c:out value="${listItem.manualCalls}"/></td>
-                            <td><c:out value="${listItem.login}"/></td>
-                            <td><c:out value="${listItem.nxdial}"/></td>
-                            <td><c:out value="${listItem.pause}"/></td>
+                            <td><c:out value="${listItem.NotReady}"/></td>
+                            <td><c:out value="${listItem.Idle}"/></td>
+                            <td><c:out value="${listItem.wrapTime}"/></td>
+                            <td><c:out value="${listItem.Total}"/></td>
+                            <td><c:out value="${listItem.Calls}"/></td>
+                            <td><c:out value="${listItem.LbBreakTime}"/></td>
+                            <td><c:out value="${listItem.TbBreakTime}"/></td>
+                            <td><c:out value="${listItem.QfbBreakTime}"/></td>
+                            <td><c:out value="${listItem.TdtBreakTime}"/></td>
+                            <td><c:out value="${listItem.BrfBreakTime}"/></td>
+                            <td><c:out value="${listItem.ManualCalls}"/></td>
+                            <td><c:out value="${listItem.Login}"/></td>
+                            <td><c:out value="${listItem.NxDial}"/></td>
+                            <%--<td><c:out value="${listItem.pause}"/></td>--%>
                         </tr>
                     </c:forEach>
                 </tbody>

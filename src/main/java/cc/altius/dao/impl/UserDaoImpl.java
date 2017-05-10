@@ -95,7 +95,7 @@ public class UserDaoImpl implements UserDao {
             String sqlString = "SELECT user.*, role.* FROM user left join user_role on user.USER_ID=user_role.USER_ID left join role on role.ROLE_ID=user_role.ROLE_ID WHERE USERNAME=?";
             return this.jdbcTemplate.queryForObject(sqlString, new CustomUserDetailsRowMapper(), username);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
             return null;
         }
     }
@@ -123,7 +123,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean confirmPassword(Password password) {
         String sqlString = "SELECT user.PASSWORD FROM user WHERE user.USER_ID=?";
-//        LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog(sqlString, new Object[]{password.getUserId()}));
         String hash = this.jdbcTemplate.queryForObject(sqlString, String.class, password.getUserId());
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 

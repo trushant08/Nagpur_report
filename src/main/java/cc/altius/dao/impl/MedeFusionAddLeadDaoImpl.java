@@ -111,7 +111,7 @@ public class MedeFusionAddLeadDaoImpl implements MedeFusionAddLeadDao {
     }
 
     @Override
-//    @Transactional()
+    @Transactional()
     public int addLivonLead(LivonLead ll) {
         maricoLogger.info("IN - " + ll.toString());
         Date curDate = DateUtils.getCurrentDateObject(DateUtils.IST);
