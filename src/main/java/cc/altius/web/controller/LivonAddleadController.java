@@ -10,6 +10,8 @@ import cc.altius.model.MaricoLeadUpload;
 import cc.altius.service.MedeFusionAddLeadService;
 import cc.altius.utils.LogUtils;
 import java.beans.PropertyEditorSupport;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,18 +61,31 @@ public class LivonAddleadController {
 
     @RequestMapping(value = "/livon/addLead.htm")
     public @ResponseBody
-    String showaddLivonLeadController(LivonLead ll, HttpServletRequest request) {
-        if (ll.getList_id() == null || !ll.getList_id().equals("656")) {
+    String showaddLivonLeadController(HttpServletRequest request) throws UnsupportedEncodingException {
+        LivonLead ll = new LivonLead();
+        String listId = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "list_id", null), "UTF-8");
+        String uniqueId = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "Unique_ID", null), "UTF-8");
+        if (listId == null || !listId.equals("656")) {
             return " Failed |list_id is invalid";
         }
+        ll.setList_id(listId);
         try {
-            ll.setPhone_No(ll.getPhone_No() == null ? "" : ll.getPhone_No());
-            ll.setRetailer_Name(ll.getRetailer_Name() == null ? "" : ll.getRetailer_Name());
-            ll.setDistributor_code(ll.getDistributor_code() == null ? "" : ll.getDistributor_code());
-            ll.setBeatDescription(ll.getBeatDescription() == null ? "" : ll.getBeatDescription());
-            ll.setDistributor_name(ll.getDistributor_name() == null ? "" : ll.getDistributor_name());
-            ll.setDsr_status(ll.getDsr_status() == null ? "" : ll.getDsr_status());
+            String phoneNo = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "Phone_No", null), "UTF-8");
+            String retailerName = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "Retailer_Name", null), "UTF-8");
+            String beatDescription = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "BeatDescription", null), "UTF-8");
+            String distributorName = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "Distributor_name", null), "UTF-8");
+            String distributorCode = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "Distributor_code", null), "UTF-8");
+            String dsrStatus = URLDecoder.decode(ServletRequestUtils.getStringParameter(request, "dsr_status", null), "UTF-8");
+
+            ll.setPhone_No(phoneNo == null ? "" : phoneNo);
+            ll.setRetailer_Name(retailerName == null ? "" : retailerName);
+            ll.setUnique_ID(uniqueId == null ? "" : uniqueId);
+            ll.setBeatDescription(beatDescription == null ? "" : beatDescription);
+            ll.setDistributor_name(distributorName == null ? "" : distributorName);
+            ll.setDistributor_code(distributorCode == null ? "" : distributorCode);
+            ll.setDsr_status(dsrStatus == null ? "" : dsrStatus);
             String message = "";
+            System.out.println("Livon :" + ll.toString());
             int result = this.medeFusionAddLeadService.addLivonLead(ll);
             if (result != 0) {
                 message += "Success|" + ll.getUnique_ID();
@@ -80,9 +95,9 @@ public class LivonAddleadController {
             maricoLogger.info(message);
             return message;
         } catch (Exception e) {
-            maricoLogger.info("Failed|" + ll.getUnique_ID() + "|Failed to insert into the db - " + e.getMessage());
+            maricoLogger.info("Failed|" + uniqueId + "|Failed to insert into the db - " + e.getMessage());
             maricoLogger.info(LogUtils.buildStringForSystemLog(e));
-            return ("Failed|" + ll.getUnique_ID() + "|Failed to insert into the db - " + e.getMessage());
+            return ("Failed|" + uniqueId + "|Failed to insert into the db - " + e.getMessage());
         }
     }
 
@@ -111,11 +126,11 @@ public class LivonAddleadController {
             if (result < 0) {
                 String error = "Error in lead upload";
                 modelMap.addAttribute("error", error);
-                return "redirect:/uploadMaricoLeads.htm?error="+error;
+                return "redirect:/uploadMaricoLeads.htm?error=" + error;
             } else {
                 String msg = result + " Leads uploaded successfully.";
                 modelMap.addAttribute("msg", msg);
-                return "redirect:/uploadMaricoLeads.htm?msg="+msg;
+                return "redirect:/uploadMaricoLeads.htm?msg=" + msg;
             }
         }
     }
