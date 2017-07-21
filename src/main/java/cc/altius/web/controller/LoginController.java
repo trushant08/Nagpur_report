@@ -4,6 +4,8 @@
  */
 package cc.altius.web.controller;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,7 +28,7 @@ public class LoginController {
     public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
         model.addAttribute("majorVersion", majorVersion);
         model.addAttribute("minorVersion", minorVersion);
-
+        
         return "login";
     }
 }

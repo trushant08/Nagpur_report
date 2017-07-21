@@ -15,7 +15,18 @@
     <context:component-scan base-package="cc.altius.service" />
     <context:annotation-config />
     
-    <bean id="springProperties"  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">    
+    <bean id="encryptorConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+        <property name="algorithm" value="PBEWithMD5AndDES" />
+        <property name="passwordEnvName" value="PASSWORD_ENV_VARIABLE" />
+    </bean>
+ 
+    <bean id="encryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+        <property name="config" ref="encryptorConfig" />
+        <property name="password" value="ALTIUS"/>
+    </bean>
+    
+    <bean id="springProperties"  class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+        <constructor-arg ref="encryptor" />
         <property name="locations">
             <list>
                 <value>
