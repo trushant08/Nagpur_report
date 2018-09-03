@@ -12,6 +12,7 @@ import cc.altius.utils.LogUtils;
 import java.beans.PropertyEditorSupport;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -116,21 +117,21 @@ public class LivonAddleadController {
     }
 
     @RequestMapping(value = "saveFeed.htm", method = RequestMethod.POST)
-    public String finalUploadFeed(HttpServletRequest request, ModelMap modelMap) {
+    public String finalUploadFeed(HttpServletRequest request, ModelMap modelMap) throws UnsupportedEncodingException {
         String cancel = ServletRequestUtils.getStringParameter(request, "_cancel", null);
         if (cancel != null) {
-            return "redirect:../home/home.htm?msg=Action cancelled";
+            return "redirect:../home/home.htm?msg=" + URLEncoder.encode("Action cancelled", "UTF-8");
         } else {
             int result = this.medeFusionAddLeadService.addMaricoLeadsByCsv();
 
             if (result < 0) {
                 String error = "Error in lead upload";
                 modelMap.addAttribute("error", error);
-                return "redirect:/uploadMaricoLeads.htm?error=" + error;
+                return "redirect:/uploadMaricoLeads.htm?error=" + URLEncoder.encode(error, "UTF-8");
             } else {
                 String msg = result + " Leads uploaded successfully.";
                 modelMap.addAttribute("msg", msg);
-                return "redirect:/uploadMaricoLeads.htm?msg=" + msg;
+                return "redirect:/uploadMaricoLeads.htm?msg=" + URLEncoder.encode(msg, "UTF-8");
             }
         }
     }

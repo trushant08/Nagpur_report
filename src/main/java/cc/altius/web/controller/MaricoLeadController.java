@@ -13,6 +13,8 @@ import cc.altius.utils.POI.POIRow;
 import cc.altius.utils.POI.POIWorkSheet;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,7 +147,7 @@ public class MaricoLeadController {
 
     @RequestMapping(value = "insertOpenLeadIntoDialer.htm", method = RequestMethod.POST)
     public String showInsertOpenLeadIntoDialer(@RequestParam("check") Integer[] check,
-            HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) throws ServletRequestBindingException {
+            HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) throws ServletRequestBindingException, UnsupportedEncodingException {
         Date curDate = DateUtils.getCurrentDateObject(DateUtils.IST);
 
         int date = ServletRequestUtils.getIntParameter(request, "id");
@@ -202,14 +204,14 @@ public class MaricoLeadController {
 
         } else if (submit.equalsIgnoreCase("Dialed for Nagpur")) {
             id = this.maricoLeadService.leadsForNagpurMarkAsDialed(leadList);
-            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + beatDesc;
+            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + URLEncoder.encode(beatDesc,"UTF-8");
         } else {
             id = this.maricoLeadService.rejectLeads(leadList);
         }
         if (id == 0) {
-            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + beatDesc;
+            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + URLEncoder.encode(beatDesc,"UTF-8");
         } else {
-            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + beatDesc;
+            return "redirect:insertOpenLeadIntoDialer.htm?id=" + date + "&desc=" + URLEncoder.encode(beatDesc,"UTF-8");
         }
 
     }
