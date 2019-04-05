@@ -63,7 +63,7 @@ public class ExcelController {
             //List<Map<String, Object>> leadData = null;
             List<Map<String, Object>> list = null;
 
-            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12) {
+            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16) {
                 if (zoneId == TIME_IST) {
                     if (reportTypeId == 1 || reportTypeId == 6) {
                         list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, serverId);
@@ -411,7 +411,7 @@ public class ExcelController {
                     out.close();
                     out.flush();
                 }
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14) {
 
                 if (zoneId == TIME_IST) {
 
@@ -569,7 +569,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-//                    headerRow.addCell("Pause");
+                    headerRow.addCell("Pause");
                     mySheet.addRow(headerRow);
 
                     for (Map<String, Object> data : list) {
@@ -592,7 +592,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("ManualCalls"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("Login"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("NxDial"), POICell.TYPE_TEXT);
-//                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }
@@ -624,7 +624,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-//                    headerRow.addCell("Pause");
+                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -680,7 +680,7 @@ public class ExcelController {
                     headerRow.addCell("Manual Calls");
                     headerRow.addCell("Login");
                     headerRow.addCell("NXDIAL");
-//                    headerRow.addCell("Pause");
+                    headerRow.addCell("Pause");
 
                     mySheet.addRow(headerRow);
 
@@ -704,7 +704,7 @@ public class ExcelController {
                         dataRow.addCell(data.get("ManualCalls"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("Login"), POICell.TYPE_TEXT);
                         dataRow.addCell(data.get("NxDial"), POICell.TYPE_TEXT);
-//                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
+                        dataRow.addCell(data.get("Pause"), POICell.TYPE_TEXT);
 
                         mySheet.addRow(dataRow);
                     }

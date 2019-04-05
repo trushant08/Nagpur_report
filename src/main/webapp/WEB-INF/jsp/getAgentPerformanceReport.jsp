@@ -33,13 +33,14 @@
                         <th>Calls</th>
                         <th>L Break Time</th>
                         <th>T Break Time</th>
+                        <th>Bio Break</th>
                         <th>Quality Feed Back</th>
                         <th>TDT Break Time</th>
                         <th>BRF Break Time</th>
                         <th>Manual Calls</th>
                         <th>Login</th>
                         <th>NXDIAL</th>
-                        <!--<th>Pause</th>-->
+                        <th>Pause</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,13 +56,14 @@
                             <td><c:out value="${listItem.Calls}"/></td>
                             <td><c:out value="${listItem.LbBreakTime}"/></td>
                             <td><c:out value="${listItem.TbBreakTime}"/></td>
+                            <td><c:out value="${listItem.BioBreak}"/></td>
                             <td><c:out value="${listItem.QfbBreakTime}"/></td>
                             <td><c:out value="${listItem.TdtBreakTime}"/></td>
                             <td><c:out value="${listItem.BrfBreakTime}"/></td>
                             <td><c:out value="${listItem.ManualCalls}"/></td>
                             <td><c:out value="${listItem.Login}"/></td>
                             <td><c:out value="${listItem.NxDial}"/></td>
-                            <%--<td><c:out value="${listItem.pause}"/></td>--%>
+                            <td><c:out value="${listItem.pause}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
