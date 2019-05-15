@@ -65,6 +65,9 @@
                         <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK6">
                             <li> <a href='goAutoDialerReport.htm?id=3'>Nagpur GoAuto Dialer Report (6)</a></li>
                         </sec:authorize>
+                        <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_ASTERISK15">
+                            <li> <a href='goAutoDialerReport.htm?id=4'>Nagpur GoAuto Dialer Report (15)</a></li>
+                        </sec:authorize>
                         <sec:authorize ifAnyGranted="ROLE_BF_ADMIN,ROLE_BF_MARICO_DSR_REPORT">
                             <li> <a href='maricoDialerReport.htm'>Marico Dialer Lead Report</a></li>
                         </sec:authorize>

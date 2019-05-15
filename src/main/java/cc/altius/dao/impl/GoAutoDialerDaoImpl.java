@@ -25,10 +25,12 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     private JdbcTemplate nagpurJdbcTemplate5;
     private JdbcTemplate nagpurJdbcTemplate14;
     private JdbcTemplate nagpurJdbcTemplate6;
+    private JdbcTemplate nagpurJdbcTemplate15;
     private DataSource dataSource;
     private DataSource nagpurDataSource5;
     private DataSource nagpurDataSource14;
     private DataSource nagpurDataSource6;
+    private DataSource nagpurDataSource15;
 
     @Autowired
     @Qualifier("dataSource")
@@ -56,6 +58,13 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     public void setNagpurDataSource6(DataSource nagpurDataSource6) {
         this.nagpurDataSource6 = nagpurDataSource6;
         this.nagpurJdbcTemplate6 = new JdbcTemplate(nagpurDataSource6);
+    }
+
+    @Autowired
+    @Qualifier("nagpurDataSource15")
+    public void setNagpurDataSource15(DataSource nagpurDataSource15) {
+        this.nagpurDataSource15 = nagpurDataSource15;
+        this.nagpurJdbcTemplate15 = new JdbcTemplate(nagpurDataSource15);
     }
 
     //GoAuto Dialer Report with Hold Time
@@ -107,8 +116,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else if (id == 2) {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
-            } else {
+            } else if (id == 3) {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
+            } else if (id == 4) {
+                report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
@@ -167,8 +178,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else if (id == 2) {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
-            } else {
+            } else if (id == 3) {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
+            } else if (id == 4) {
+                report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
@@ -218,8 +231,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else if (id == 2) {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
-            } else {
+            } else if (id == 3) {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
+            } else if (id == 4) {
+                report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
             }
 
         } catch (Exception e) {
@@ -294,7 +309,6 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
 //                + "AND talk_sec <65000\n"
 //                + "AND dispo_sec <65000\n"
 //                + "AND vicidial_agent_log.`campaign_id` IN (";
-
         String strSelectedServiceIds = "'";
         for (String i : selectedServiceIds) {
             strSelectedServiceIds += i + "','";
@@ -312,8 +326,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate);
             } else if (id == 2) {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate);
-            } else {
+            } else if (id == 3) {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
+            } else if (id == 4) {
+                report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
             }
 
         } catch (Exception e) {
@@ -370,8 +386,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate5.queryForList(sql, startDate, endDate, startDate, endDate);
             } else if (id == 2) {
                 report = this.nagpurJdbcTemplate14.queryForList(sql, startDate, endDate, startDate, endDate);
-            } else {
+            } else if (id == 3) {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate, startDate, endDate);
+            } else if (id == 4) {
+                report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
