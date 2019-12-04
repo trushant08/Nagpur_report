@@ -124,9 +124,9 @@ public class GoAutoDialerController {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, id);
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 list = this.goAutoDialerService.getGoAutoDialerInboundList(startDate, endDate, selectedServiceIds, id);
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, id);
-            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19) {
+            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19 || reportTypeId == 23 || reportTypeId == 27) {
                 list = this.goAutoDialerService.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
             } else {
                 list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, id);
@@ -140,11 +140,11 @@ public class GoAutoDialerController {
             LogUtils.systemLogger.info(LogUtils.buildStringForSystemLog("List length :" +list.size()));
             modelMap.addAttribute("list", list);
 
-            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20) {
+            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20 || reportTypeId == 24 || reportTypeId == 28) {
                 return "goAutoDialerInboundReport";
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 return "goAutoDialerInboundReportList";
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 return "goAutoDialerOutboundReport";
             } else {
                 return "getAgentPerformanceReport";
@@ -157,9 +157,9 @@ public class GoAutoDialerController {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDate, endDate, selectedServiceIds, id);
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 list = this.goAutoDialerService.getGoAutoDialerInboundList(startDate, endDate, selectedServiceIds, id);
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 list = this.goAutoDialerService.goAutoDialerOutboundReport(startDate, endDate, selectedServiceIds, reportTypeId, id);
-            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19) {
+            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19 || reportTypeId == 23 || reportTypeId == 27) {
                 list = this.goAutoDialerService.getAgentPerformanceReport(startDate, endDate, selectedServiceIds, id);
             } else {
                 list = this.goAutoDialerService.getInboundReportNew(startDate, endDate, selectedServiceIds, id);
@@ -171,11 +171,11 @@ public class GoAutoDialerController {
             }
             modelMap.addAttribute("list", list);
 
-            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20) {
+            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20 || reportTypeId == 24 || reportTypeId == 28) {
                 return "goAutoDialerInboundReport";
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 return "goAutoDialerInboundReportList";
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 return "goAutoDialerOutboundReport";
             } else {
                 return "getAgentPerformanceReport";
@@ -190,9 +190,9 @@ public class GoAutoDialerController {
                 list = this.goAutoDialerService.goAutoDialerInboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 list = this.goAutoDialerService.getGoAutoDialerInboundList(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 list = this.goAutoDialerService.goAutoDialerOutboundReport(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, reportTypeId, id);
-            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19) {
+            } else if (reportTypeId == 5 || reportTypeId == 10 || reportTypeId == 15 || reportTypeId == 19 || reportTypeId == 23 || reportTypeId == 27) {
                 list = this.goAutoDialerService.getInboundReportNew(startDatePST_To_EST, endDatePST_To_EST, selectedServiceIds, id);
             }
 
@@ -203,11 +203,11 @@ public class GoAutoDialerController {
             }
             modelMap.addAttribute("list", list);
 
-            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20) {
+            if (reportTypeId == 1 || reportTypeId == 6 || reportTypeId == 11 || reportTypeId == 12 || reportTypeId == 16 || reportTypeId == 20 || reportTypeId == 24 || reportTypeId == 28) {
                 return "goAutoDialerInboundReport";
             } else if (reportTypeId == 2 || reportTypeId == 7) {
                 return "goAutoDialerInboundReportList";
-            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18) {
+            } else if (reportTypeId == 3 || reportTypeId == 4 || reportTypeId == 8 || reportTypeId == 9 || reportTypeId == 13 || reportTypeId == 14 || reportTypeId == 17 || reportTypeId == 18 || reportTypeId == 21 || reportTypeId == 22 || reportTypeId == 25 || reportTypeId == 26) {
                 return "goAutoDialerOutboundReport";
             } else {
                 return "getAgentPerformanceReport";

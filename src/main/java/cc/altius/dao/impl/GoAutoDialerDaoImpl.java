@@ -26,11 +26,15 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     private JdbcTemplate nagpurJdbcTemplate14;
     private JdbcTemplate nagpurJdbcTemplate6;
     private JdbcTemplate nagpurJdbcTemplate15;
+    private JdbcTemplate nagpurJdbcTemplate16;
+    private JdbcTemplate nagpurJdbcTemplateEcom;
     private DataSource dataSource;
     private DataSource nagpurDataSource5;
     private DataSource nagpurDataSource14;
     private DataSource nagpurDataSource6;
     private DataSource nagpurDataSource15;
+    private DataSource nagpurDataSource16;
+    private DataSource nagpurDataSourceEcom;
 
     @Autowired
     @Qualifier("dataSource")
@@ -65,6 +69,20 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
     public void setNagpurDataSource15(DataSource nagpurDataSource15) {
         this.nagpurDataSource15 = nagpurDataSource15;
         this.nagpurJdbcTemplate15 = new JdbcTemplate(nagpurDataSource15);
+    }
+
+    @Autowired
+    @Qualifier("nagpurDataSource16")
+    public void setNagpurDataSource16(DataSource nagpurDataSource16) {
+        this.nagpurDataSource16 = nagpurDataSource16;
+        this.nagpurJdbcTemplate16 = new JdbcTemplate(nagpurDataSource16);
+    }
+
+    @Autowired
+    @Qualifier("nagpurDataSourceEcom")
+    public void setNagpurDataSourceEcom(DataSource nagpurDataSourceEcom) {
+        this.nagpurDataSourceEcom = nagpurDataSourceEcom;
+        this.nagpurJdbcTemplateEcom = new JdbcTemplate(nagpurDataSourceEcom);
     }
 
     //GoAuto Dialer Report with Hold Time
@@ -120,6 +138,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
             } else if (id == 4) {
                 report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
+            } else if (id == 5) {
+                report = this.nagpurJdbcTemplate16.queryForList(sql, startDate, endDate);
+            } else if (id == 6) {
+                report = this.nagpurJdbcTemplateEcom.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
@@ -182,6 +204,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
             } else if (id == 4) {
                 report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
+            } else if (id == 5) {
+                report = this.nagpurJdbcTemplate16.queryForList(sql, startDate, endDate);
+            } else if (id == 6) {
+                report = this.nagpurJdbcTemplateEcom.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
@@ -206,10 +232,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 + "FROM vicidial_log "
                 + "LEFT JOIN call_log ON call_log.`uniqueid` = vicidial_log.`uniqueid` "
                 + "WHERE vicidial_log.`call_date` BETWEEN ? AND ? ";
-        if (reportTypeId == 3 || reportTypeId == 8) {
+        if (reportTypeId == 3 || reportTypeId == 8 || reportTypeId == 13 || reportTypeId == 17 || reportTypeId == 21) {
             sql += "AND (vicidial_log.`comments` IS NULL OR vicidial_log.`comments` ='auto' ) ";
         }
-        if (reportTypeId == 4 || reportTypeId == 9) {
+        if (reportTypeId == 4 || reportTypeId == 9 || reportTypeId == 14 || reportTypeId == 18 || reportTypeId == 22) {
             sql += "AND vicidial_log.`comments` ='manual' ";
         }
 
@@ -235,6 +261,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
             } else if (id == 4) {
                 report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
+            } else if (id == 5) {
+                report = this.nagpurJdbcTemplate16.queryForList(sql, startDate, endDate);
+            } else if (id == 6) {
+                report = this.nagpurJdbcTemplateEcom.queryForList(sql, startDate, endDate);
             }
 
         } catch (Exception e) {
@@ -330,6 +360,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate);
             } else if (id == 4) {
                 report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate);
+            } else if (id == 5) {
+                report = this.nagpurJdbcTemplate16.queryForList(sql, startDate, endDate);
+            } else if (id == 6) {
+                report = this.nagpurJdbcTemplateEcom.queryForList(sql, startDate, endDate);
             }
 
         } catch (Exception e) {
@@ -390,6 +424,10 @@ public class GoAutoDialerDaoImpl implements GoAutoDialerDao {
                 report = this.nagpurJdbcTemplate6.queryForList(sql, startDate, endDate, startDate, endDate);
             } else if (id == 4) {
                 report = this.nagpurJdbcTemplate15.queryForList(sql, startDate, endDate, startDate, endDate);
+            } else if (id == 5) {
+                report = this.nagpurJdbcTemplate16.queryForList(sql, startDate, endDate);
+            } else if (id == 6) {
+                report = this.nagpurJdbcTemplateEcom.queryForList(sql, startDate, endDate);
             }
         } catch (Exception e) {
             LogUtils.systemLogger.error(LogUtils.buildStringForSystemLog(e));
