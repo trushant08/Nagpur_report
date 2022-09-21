@@ -9,7 +9,7 @@
 
     <parent>
     <groupId>cc.altius</groupId>
-    <artifactId>report.altius</artifactId>
+    <artifactId>altiusUtilsMaven</artifactId>
     <version>1.0-SNAPSHOT</version>
     </parent>
 
