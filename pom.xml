@@ -11,10 +11,10 @@
     <groupId>cc.altius</groupId>
     <artifactId>report.altius</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    </parent>
 
     <name>report.altius</name>
-
+    <packaging>war</packaging>
      <properties>
 
     <!-- Generic properties -->
