@@ -19,7 +19,7 @@
         <dependency>
             <groupId>altiusUtilsMaven</groupId>
             <artifactId>altiusUtilsMaven</artifactId>
-            <version>1.26</version>
+            <version>1.36</version>
         </dependency>
         <dependency>
             <groupId>aopalliance</groupId>
