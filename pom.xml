@@ -18,9 +18,9 @@
          
     <dependencies>
         <dependency>
-            <groupId>altiusUtilsMaven</groupId>
-            <artifactId>altiusUtilsMaven</artifactId>
-            <version>1.36</version>
+            <groupId>io.github.trushant08</groupId>
+    <artifactId>altiusUtilsMaven</artifactId>
+    <version>1.36</version>
         </dependency>
         <dependency>
             <groupId>aopalliance</groupId>
